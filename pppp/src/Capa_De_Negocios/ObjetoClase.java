@@ -1,4 +1,4 @@
-package CapaDeNegocios;
+package Capa_De_Negocios;
 
 import java.util.ArrayList;
 
