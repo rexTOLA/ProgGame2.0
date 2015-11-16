@@ -2,7 +2,7 @@ package Capa_de_Datos;
 
 public class AccesosBD {
 	
-//Inicio de sesión
+//Inicio de sesión y registro
 	
 	/**
 	 * Método que registra un nuevo usuario en la BD
