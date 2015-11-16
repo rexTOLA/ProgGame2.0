@@ -1,4 +1,4 @@
-package Main;
+package CapaDeNegocios;
 
 import java.util.ArrayList;
 
