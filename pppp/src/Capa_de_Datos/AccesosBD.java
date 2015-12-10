@@ -1,6 +1,42 @@
 package Capa_de_Datos;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import Capa_De_Negocios.ObjetoNivel;
+
 public class AccesosBD {
+	
+//Conexión a la Base de Datos
+	
+	private static Connection connection;
+	private static Statement statement;
+	
+	private static void abrirConex() {
+		try {
+			connection = DriverManager.getConnection("ojdbc6.jar");
+			statement = connection.createStatement();
+			try {
+				statement.executeUpdate("");
+			} catch (SQLException e) {
+				if (!e.getMessage().equals(""))  
+					e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void cerrarConex() {
+		try {
+			statement.close();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 //Inicio de sesión y registro
 	
@@ -18,7 +54,7 @@ public class AccesosBD {
 	 * @param pass Contraseña del usuario
 	 * @return código que el usuario tiene asignado en la BD
 	 */
-	public int log(String nombre, String pass);
+	public int log(String nombr1e, String pass);
 	
 //Juego
 
@@ -29,7 +65,7 @@ public class AccesosBD {
 	 * @param nombre Nombre del nivel
 	 * @return Objeto Nivel con la información del ejercicio
 	 */
-	public Nivel getNivel(int Cod_u, String paquete, String nombre);
+	public ObjetoNivel getNivel(int Cod_u, String paquete, String nombre);
 	
 	/**
 	 * Devuelve el código asignado en la BD al paquete indicado por parámteros
@@ -51,7 +87,7 @@ public class AccesosBD {
 	 * @param nivel Código del nivel
 	 * @return Objeto Nivel
 	 */
-	private Nivel crearNivel(int paquete, int nivel);
+	private ObjetoNivel crearNivel(int paquete, int nivel);
 	
 	/**
 	 * Guarda un ejercicio en el ordenador del usuario con las modificaciones que ha hecho respecto al original
