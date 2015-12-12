@@ -10,7 +10,7 @@ public class ObjetoNivel {
 	/**
 	 * Arraylist de las clases para los niveles
 	 */
-	//ArrayList<Clase>clases;
+	ArrayList<ObjetoClase>clases;
 	/**
 	 * Numero del nivel
 	 */
