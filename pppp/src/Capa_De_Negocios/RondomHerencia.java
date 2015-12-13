@@ -8,7 +8,9 @@ package Capa_De_Negocios;
  *
  */
 public class RondomHerencia {
-	
+	//Pagina web para mirar los counters 
+	// http://vaughnroyko.com/sciicounters/
+	//Hay que meterla en la ventana final
 	public static void enemigo (){
 		double a = Math.random();
 		if(a>=0 && a<=0.33){
