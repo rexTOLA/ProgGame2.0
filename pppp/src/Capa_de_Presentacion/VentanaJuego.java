@@ -4,6 +4,7 @@ package Capa_de_Presentacion;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
+import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 public class VentanaJuego extends JFrame {
 	protected static VentanaJuego miVentana = null;
@@ -45,6 +47,10 @@ public class VentanaJuego extends JFrame {
 				}
 			}
 		});*/
+		try{
+			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+		}catch(Exception e){}
+			
 		VentanaJuego.init();
 		VentanaJuego.println("hola");
 
@@ -55,6 +61,8 @@ public class VentanaJuego extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaJuego() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaLogin.class.getResource("/Capa_de_Presentacion/logo64x64.png")));
+		setTitle("ProgGaming");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();

@@ -1,6 +1,6 @@
 package Capa_de_Presentacion;
 
-import java.util.ArrayList;
+
 
 public class Consola {
 	protected String opcion;
