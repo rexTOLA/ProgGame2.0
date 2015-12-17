@@ -30,7 +30,7 @@ public class VentanaLogin extends JFrame {
 	 */
 	public static void main(String[] args) {
 		try{
-			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+			UIManager.setLookAndFeel("com.nilo.plaf.nimrod.NimRODLookAndFeel");
 		}catch(Exception e){
 			
 		}
@@ -66,9 +66,11 @@ public class VentanaLogin extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblUsername = new JLabel("USERNAME");
+		lblUsername.setForeground(Color.ORANGE);
 		lblUsername.setFont(new Font("Power Red and Blue Intl", Font.BOLD, 20));
 		
 		JLabel lblPassword = new JLabel("PASSWORD");
+		lblPassword.setForeground(Color.ORANGE);
 		lblPassword.setFont(new Font("Power Red and Blue Intl", Font.BOLD, 20));
 		
 		textField = new JTextField();

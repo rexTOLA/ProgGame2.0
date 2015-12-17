@@ -48,7 +48,7 @@ public class VentanaJuego extends JFrame {
 			}
 		});*/
 		try{
-			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+			UIManager.setLookAndFeel("com.nilo.plaf.nimrod.NimRODLookAndFeel");
 		}catch(Exception e){}
 			
 		VentanaJuego.init();
