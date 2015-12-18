@@ -19,7 +19,6 @@ import Capa_De_Negocios.ObjetoNivel;
 public class AccesosBD implements Serializable{
 	
 //Conexión a la Base de Datos
-	//prueba
 	
 		private static Connection connection;
 		private static Statement statement;
