@@ -1,4 +1,4 @@
-package Zerg;
+package Capa_De_Negocios.Zerg;
 
 public class Bicho {
 	protected int vida;

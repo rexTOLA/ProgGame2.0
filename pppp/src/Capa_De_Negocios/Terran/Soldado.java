@@ -1,25 +1,25 @@
-package Protoss;
+package Capa_De_Negocios.Terran;
 
-public class Templario {
+public class Soldado {
 	protected int vida;
-	protected int escudo;
+	protected int armadura;
 	protected int ataque;
 	protected int vMovimiento;
 	
 	
-	public Templario(int vida, int escudo, int ataque, int movimiento) {
+	public Soldado(int vida, int armadura, int ataque, int vMovimiento) {
 		super();
 		this.vida = vida;
-		this.escudo = escudo;
+		this.armadura = armadura;
 		this.ataque = ataque;
-		this.vMovimiento = movimiento;
+		this.vMovimiento = vMovimiento;
 	}
 
 	//Constructor vacio
-	public Templario() {
+	public Soldado() {
 		super();
 	}
-
+	
 	//Getters y Setters
 	public int getVida() {
 		return vida;
@@ -29,12 +29,12 @@ public class Templario {
 		this.vida = vida;
 	}
 
-	public int getEscudo() {
-		return escudo;
+	public int getArmadura() {
+		return armadura;
 	}
 
-	public void setEscudo(int escudo) {
-		this.escudo = escudo;
+	public void setArmadura(int armadura) {
+		this.armadura = armadura;
 	}
 
 	public int getAtaque() {
@@ -45,12 +45,12 @@ public class Templario {
 		this.ataque = ataque;
 	}
 
-	public int getMovimiento() {
+	public int getvMovimiento() {
 		return vMovimiento;
 	}
 
-	public void setMovimiento(int movimiento) {
-		this.vMovimiento = movimiento;
+	public void setvMovimiento(int vMovimiento) {
+		this.vMovimiento = vMovimiento;
 	}
 
 	//Main de prueba

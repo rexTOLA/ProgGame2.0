@@ -7,7 +7,7 @@ package Capa_De_Negocios;
  * @author artop_000
  *
  */
-public class RondomHerencia {
+public class RandomHerencia {
 	//Pagina web para mirar los counters 
 	// http://vaughnroyko.com/sciicounters/
 	//Hay que meterla en la ventana final
