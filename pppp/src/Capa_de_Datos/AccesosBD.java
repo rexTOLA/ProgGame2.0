@@ -22,17 +22,18 @@ public class AccesosBD implements Serializable{
 	
 		private static Connection connection;
 		private static Statement statement;
+		private static String nombreBD;
 		
+		/**
+		 * Método para abrir una conexión con la base de datos
+		 */
 		private static void abrirConex() {
 			try {
-				connection = DriverManager.getConnection("ojdbc6.jar");
+				//SQLITE
+				//Añadir en build path la libreria
+				connection = DriverManager.getConnection("jdbc:sqlite:" + nombreBD);
 				statement = connection.createStatement();
-				try {
-					statement.executeUpdate("");
-				} catch (SQLException e) {
-					if (!e.getMessage().equals(""))  
-						e.printStackTrace();
-				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -55,7 +56,7 @@ public class AccesosBD implements Serializable{
 	 * @param pass Contraseña del usuario
 	 * @return código que el usuario tiene asignado en la BD
 	 */
-	public int reg(String nombre, String pass){
+	public static int reg(String nombre, String pass){
 		return 0;
 	}
 	
@@ -65,7 +66,7 @@ public class AccesosBD implements Serializable{
 	 * @param pass Contraseña del usuario
 	 * @return código que el usuario tiene asignado en la BD
 	 */
-	public int log(String nombr1e, String pass){
+	public static int log(String nombr1e, String pass){
 		return 0;
 	}
 	
@@ -77,7 +78,7 @@ public class AccesosBD implements Serializable{
 	 * @param nombre Nombre del nivel
 	 * @return Objeto Nivel con la información del ejercicio
 	 */
-	public ObjetoNivel getNivel(int Cod_u, String nombre){
+	public static ObjetoNivel getNivel(int Cod_u, String nombre){
 		abrirConex();
 		String cod_nivel = traductorNivel(nombre);
 		ObjetoNivel nivel = crearNivel(cod_nivel);
@@ -90,7 +91,7 @@ public class AccesosBD implements Serializable{
 		 * @param nivel Nombre del nivel
 		 * @return Códgio del nivel
 		 */
-		private String traductorNivel(String nivel){
+		private static String traductorNivel(String nivel){
 			final String sent = "SELECT COD_NIVEL FROM NIVELES WHERE NOMBRE_NIVEL = " + nivel;
 			ResultSet resultado = null;
 			try {
@@ -113,7 +114,7 @@ public class AccesosBD implements Serializable{
 		 * @param nivel Código del nivel
 		 * @return Objeto Nivel
 		 */
-		private ObjetoNivel crearNivel(String nivel){
+		private static ObjetoNivel crearNivel(String nivel){
 			final String sent = "SELECT COD_CLASE FROM CLASES WHERE COD_NIVEL = " + nivel;
 			ResultSet resultado = null;
 			try {
@@ -140,7 +141,7 @@ public class AccesosBD implements Serializable{
 		 * @param nivel Código de la Clase
 		 * @return Objeto Clase
 		 */
-		private ObjetoClase crearClase(String clase){
+		private static ObjetoClase crearClase(String clase){
 			final String sent = "SELECT CONTENIDO FROM CLASE WHERE COD_CLASE = " + clase;
 			ResultSet resultado = null;
 			try {
@@ -161,7 +162,7 @@ public class AccesosBD implements Serializable{
 		 * @param nombre
 		 * @param clase
 		 */
-		private void escribeFichero(String nombre, Class<T> clase){
+		private static void escribeFichero(String nombre, Class<T> clase){
 			//PARA PASAR LA CLASE EN SI??
 			try{
 				FileOutputStream fos = new FileOutputStream(nombre + ".dat");
@@ -178,7 +179,7 @@ public class AccesosBD implements Serializable{
 		 * @param nombre
 		 * @return
 		 */
-		private ObjetoClase leerFichero(String nombre){
+		private static ObjetoClase leerFichero(String nombre){
 			ObjetoClase clase = new ObjetoClase();
 			try{
 				FileInputStream fis = new FileInputStream(nombre + ".dat");
@@ -198,7 +199,7 @@ public class AccesosBD implements Serializable{
 	 * @param Cod_n Código del nivel resuelto
 	 * @return True si se ha guardado con éxito, Falso en caso contrario
 	 */
-	public boolean guardarEjercicio(int Cod_u, int tiempo, int Cod_n){
+	public static boolean guardarEjercicio(int Cod_u, int tiempo, int Cod_n){
 		return false;
 	}
 	
@@ -209,7 +210,7 @@ public class AccesosBD implements Serializable{
 		 * @param Cod_u Usuairo que lo ha resuelto
 		 * @return True si se ha podidio guardar, False en caso contrario
 		 */
-		private boolean ranking(int tiempo, int Cod_n, int Cod_u){
+		private static boolean ranking(int tiempo, int Cod_n, int Cod_u){
 			return false;
 		}
 	
@@ -219,7 +220,7 @@ public class AccesosBD implements Serializable{
 	 * @param Cod_u Código del usuario que desdea ver los niveles disponibles
 	 * @return ArrayList<String> con los nombres de los niveles, en los nombres estará el numero del nivel + el nombre
 	 */
-	public ArrayList<String> mostrarNiveles(String paquete, int Cod_u){
+	public static ArrayList<String> mostrarNiveles(String paquete, int Cod_u){
 		ArrayList<String> a = new ArrayList<>();
 		return a;
 	}
