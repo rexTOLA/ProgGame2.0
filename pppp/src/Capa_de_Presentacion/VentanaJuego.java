@@ -30,9 +30,6 @@ public class VentanaJuego extends JFrame {
 	protected JTextArea taSalida = new JTextArea();
 	protected JScrollPane spSalida = new JScrollPane(taSalida);
 
-
-
-
 	/**
 	 * Launch the application.
 	 */
