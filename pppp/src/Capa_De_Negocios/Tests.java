@@ -1,4 +1,4 @@
-package Capa_De_Negocios;
+package src.Capa_De_Negocios;
 
 import Capa_De_Negocios.ej_Deslizar.Ej_Deslizar;
 import java.io.BufferedReader;
