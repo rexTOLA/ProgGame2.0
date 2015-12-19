@@ -7,7 +7,7 @@ public class ObjetoJuego {
 	public ObjetoJuego(Character type){
 		this.type = type;
 	}
-	
+
 	public String toString(){
 		return type.toString();
 	}

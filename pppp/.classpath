@@ -2,6 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/Ainhoa/git/ProgGame2.0/pppp/sqlite-jdbc-3.8.11.2.jar"/>
+=======
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="nimrodlf.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/Ainhoa/git/ProgGame2.0/pppp/sqlite-jdbc-3.8.11.2.jar"/>
+>>>>>>> branch 'master' of https://github.com/rexTOLA/ProgGame2.0.git
+>>>>>>> branch 'master' of https://github.com/rexTOLA/ProgGame2.0.git
 	<classpathentry kind="output" path="bin"/>
 </classpath>

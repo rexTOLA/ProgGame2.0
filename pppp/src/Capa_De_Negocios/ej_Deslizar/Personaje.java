@@ -6,7 +6,7 @@ public class Personaje extends ObjetoJuego{
 	int actualY;
 	int previousX;
 	int previousY;
-	
+
 	public Personaje() {
 		super('0');
 		previousX = actualX = 2;

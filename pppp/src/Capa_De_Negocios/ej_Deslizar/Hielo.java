@@ -5,7 +5,7 @@ public class Hielo extends Tile {
 	public Hielo() {
 		super('H');
 	}
-	
+
 	public Hielo(Character type){
 		super(type);
 	}
