@@ -1,7 +1,7 @@
 package Capa_De_Negocios.ej_Deslizar;
 
 public class Ej_Deslizar {
-	
+	 
 	Tile ph = new Pared ('-');
 	Tile pv = new Pared ('|');
 	Tile pe = new Pared (' ');

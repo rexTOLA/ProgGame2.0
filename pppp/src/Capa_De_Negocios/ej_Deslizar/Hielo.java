@@ -1,7 +1,7 @@
 package Capa_De_Negocios.ej_Deslizar;
 
 public class Hielo extends Tile {
-
+ 
 	public Hielo() {
 		super('H');
 	}

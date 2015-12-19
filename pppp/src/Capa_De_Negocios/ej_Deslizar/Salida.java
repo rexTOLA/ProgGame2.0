@@ -1,7 +1,7 @@
 package Capa_De_Negocios.ej_Deslizar;
 
 public class Salida extends Tile{
-
+ 
 	public Salida() {
 		super('*');
 	}

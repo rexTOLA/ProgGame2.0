@@ -1,7 +1,7 @@
 package Capa_De_Negocios.ej_Deslizar;
 
 public class Personaje extends ObjetoJuego{
-	
+	 
 	int actualX;
 	int actualY;
 	int previousX;
