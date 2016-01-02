@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/artop_000/git/pppp/pppp/nimrodlf.jar"/>
-	<classpathentry kind="lib" path="C:/Users/artop_000/git/pppp/pppp/sqlite-jdbc-3.8.11.2.jar"/>
+	<classpathentry kind="lib" path="nimrodlf.jar"/>
+	<classpathentry kind="lib" path="sqlite-jdbc-3.8.11.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
