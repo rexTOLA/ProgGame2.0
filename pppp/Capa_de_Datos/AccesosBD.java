@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import Capa_De_Negocios.ObjetoClase;
 import Capa_De_Negocios.ObjetoNivel;
-//hola
+
 public class AccesosBD implements Serializable{
 	
 //Conexión a la Base de Datos
