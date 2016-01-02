@@ -1,4 +1,4 @@
-package src.Capa_De_Negocios;
+package Capa_De_Negocios;
 
 /**
  * Esta es la clase que va a sacar random el enunciado del ejercicio de erencia que se va amostrar en la ventana
