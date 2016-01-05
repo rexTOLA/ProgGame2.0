@@ -1,4 +1,4 @@
-package Capa_De_Negocios.ej_Deslizar;
+package Ej_Deslizar;
 
 public class Pared extends Tile {
 

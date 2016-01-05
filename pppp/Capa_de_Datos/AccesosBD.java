@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.InvalidObjectException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -57,8 +58,13 @@ public class AccesosBD implements Serializable{
 	 * @param pass Contraseña del usuario
 	 * @return código que el usuario tiene asignado en la BD
 	 */
-	public static int reg(String nombre, String pass){
-		return 0;
+	public static String reg(String nombre, String pass){
+		abrirConex();
+		String a = "COD_" + nombre;
+		String b = a + ", " + nombre + ", " + pass;
+		insertRowInto(b, "JUGADORES");
+		cerrarConex();
+		return a;
 	}
 	
 	/**
@@ -67,25 +73,40 @@ public class AccesosBD implements Serializable{
 	 * @param pass Contraseña del usuario
 	 * @return código que el usuario tiene asignado en la BD
 	 */
-	public static int log(String nombr1e, String pass){
-		return 0;
+	public static String log(String nombre, String pass){
+		abrirConex();
+		final String sent1 = "SELECT COD_JUG FROM JUGADORES WHERE USUARIO = '" + nombre + "' AND PASS = '" + nombre + "';";
+		ResultSet resultado = null;
+		try {
+			resultado = statement.executeQuery(sent1);
+		} catch (SQLException e) {
+			System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent1);
+			e.printStackTrace();
+		}
+		String cod_jug = "";
+		try {
+			resultado.next();
+			cod_jug = resultado.getString(1);
+		} catch (SQLException e) {
+		}
+		cerrarConex();
+		return cod_jug;
 	}
 	
 //Juego
 
 	/**
-	 * Método que devuelve un objeto Nivel con la información del nivel pedido por parámetros y con la información específica del usuario indicado
-	 * @param Cod_u Código del usuario que desdea resolver el nivel
-	 * @param nombre Nombre del nivel
-	 * @return Objeto Nivel con la información del ejercicio
+	 * Método que devuelve un objetoNivel con la información del nivel pedido por parámetros
+	 * @param nom_nivel
+	 * @return
 	 */
-//	public static ObjetoNivel getNivel(int Cod_u, String nombre){
-//		abrirConex();
-//		String cod_nivel = traductorNivel(nombre);
-//		ObjetoNivel nivel = crearNivel(cod_nivel);
-//		cerrarConex();
-//		return nivel;
-//	}
+	public static ObjetoNivel getNivel(String nom_nivel){
+		abrirConex();
+		String cod_nivel = traductorNivel(nom_nivel);
+		ObjetoNivel oNivel = crearNivel(cod_nivel, nom_nivel);
+		cerrarConex();
+		return oNivel;
+	}
 	
 		/**
 		 * Devuelve el código asignado en la BD al nivel indicado por parámteros
@@ -93,12 +114,12 @@ public class AccesosBD implements Serializable{
 		 * @return Códgio del nivel
 		 */
 		private static String traductorNivel(String nivel){
-			final String sent = "SELECT COD_NIVEL FROM NIVELES WHERE NOMBRE_NIVEL = " + nivel;
+			final String sent1 = "SELECT COD_NIVEL FROM NIVELES WHERE NOMBRE_NIVEL = '" + nivel + "';";
 			ResultSet resultado = null;
 			try {
-				resultado = statement.executeQuery(sent);
+				resultado = statement.executeQuery(sent1);
 			} catch (SQLException e) {
-				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent);
+				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent1);
 				e.printStackTrace();
 			}
 			String cod_nivel = "";
@@ -112,68 +133,77 @@ public class AccesosBD implements Serializable{
 
 		/**
 		 * Crea un objeto Nivel con la información del nivel referenciado por parámetros que saca de la BD
-		 * @param nivel Código del nivel
-		 * @return Objeto Nivel
+		 * @param cod_nivel Código del nivel
+		 * @return
 		 */
-//		private static ObjetoNivel crearNivel(String nivel){
-//			final String sent = "SELECT COD_CLASE FROM CLASES WHERE COD_NIVEL = " + nivel;
-//			ResultSet resultado = null;
-//			try {
-//				resultado = statement.executeQuery(sent);
-//			} catch (SQLException e) {
-//				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent);
-//				e.printStackTrace();
-//			}
-//			ObjetoNivel oNivel = new ObjetoNivel();
-//			try {
-//				for(int i = 0; i<resultado.getFetchSize(); i++){
-//					ObjetoClase oClase = crearClase(resultado.getString(i));
-//					//Cuando se añada el parámetro del ArrayList al objetoNivel, guardar en él
-//					//la clase que se cree en cada iteración
-//				}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}			
-//			return oNivel;
-//		}
+		private static ObjetoNivel crearNivel(String cod_nivel, String nom_nivel){
+			final String sent = "SELECT COD_CLASE FROM CLASES WHERE COD_NIVEL = '" + cod_nivel + "';";
+			ResultSet resultado = null;
+			try {
+				resultado = statement.executeQuery(sent);
+			} catch (SQLException e) {
+				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent);
+				e.printStackTrace();
+			}
+			ArrayList<ObjetoClase> clasesDeN = new ArrayList<>();
+			try {
+				while(resultado.next()){
+					ObjetoClase oClase = crearClase(resultado.getString(1));
+					clasesDeN.add(oClase);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			ObjetoNivel oNivel = new ObjetoNivel(cod_nivel, nom_nivel, clasesDeN);
+			return oNivel;
+		}
 
 		/**
 		 * Crea un objeto Clase sacando de la BD la infromación de la clase cuyo código recive por prámetros
-		 * @param nivel Código de la Clase
-		 * @return Objeto Clase
+		 * @param cod_clase
+		 * @return
 		 */
-//		private static ObjetoClase crearClase(String clase){
-//			final String sent = "SELECT CONTENIDO FROM CLASE WHERE COD_CLASE = " + clase;
-//			ResultSet resultado = null;
-//			try {
-//				resultado = statement.executeQuery(sent);
-//			} catch (SQLException e) {
-//				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent);
-//				e.printStackTrace();
-//			}
-//			//Cuando se decida cómo pasar la clase, cambiar también la llamada
-////			escribeFichero(clase, resultado.getString(1));
-//			//Al crear el objeto, pasar los parámetros necesarios			
-//			ObjetoClase oClase = new ObjetoClase();
-//			return oClase;
-//		}
+		private static ObjetoClase crearClase(String cod_clase){
+			final String sent = "SELECT * FROM CLASES WHERE COD_CLASE = '" + cod_clase + "';";
+			ResultSet resultado = null;
+			try {
+				resultado = statement.executeQuery(sent);
+			} catch (SQLException e) {
+				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent);
+				e.printStackTrace();
+			}
+			String nom_clase = "";
+			boolean alterable = false;
+			String cod_nivel = "";
+			try {
+				while(resultado.next()){
+					nom_clase = resultado.getString(2);
+					alterable = resultado.getBoolean(3);
+					cod_nivel = resultado.getString(4);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			ObjetoClase oClase = new ObjetoClase(cod_clase, nom_clase, alterable, cod_nivel);
+			return oClase;
+		}
 		
 		/**
 		 * Escribe en un fichero la clase que se le pasa por parámetros
 		 * @param nombre
 		 * @param clase
 		 */
-		private static void escribeFichero(String nombre/*, Class<T> clase*/){
-			//PARA PASAR LA CLASE EN SI??
-			try{
-				FileOutputStream fos = new FileOutputStream(nombre + ".dat");
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-//				oos.writeObject(clase);
-				oos.close();
-			} catch (IOException e){
-				System.out.println("ERROR");
-			}
-		}
+//		private static void escribeFichero(String nombre/*, Class<T> clase*/){
+//			//PARA PASAR LA CLASE EN SI??
+//			try{
+//				FileOutputStream fos = new FileOutputStream(nombre + ".dat");
+//				ObjectOutputStream oos = new ObjectOutputStream(fos);
+////				oos.writeObject(clase);
+//				oos.close();
+//			} catch (IOException e){
+//				System.out.println("ERROR");
+//			}
+//		}
 		
 		/**
 		 * Lee la clase guardad en el fichero cuyo nombre recive por parámetros
@@ -193,16 +223,16 @@ public class AccesosBD implements Serializable{
 //			return clase;
 //		}
 	
-	/**
-	 * Guarda un ejercicio en el ordenador del usuario con las modificaciones que ha hecho respecto al original
-	 * @param Cod_u Código del usuario que ha realizado el ejericio
-	 * @param tiempo Tiempo en el que lo a realizado (si ha sido completado con éxito, si no 0:00)
-	 * @param Cod_n Código del nivel resuelto
-	 * @return True si se ha guardado con éxito, Falso en caso contrario
-	 */
-	public static boolean guardarEjercicio(int Cod_u, int tiempo, int Cod_n){
-		return false;
-	}
+//	/**
+//	 * Guarda un ejercicio en el ordenador del usuario con las modificaciones que ha hecho respecto al original
+//	 * @param Cod_u Código del usuario que ha realizado el ejericio
+//	 * @param tiempo Tiempo en el que lo a realizado (si ha sido completado con éxito, si no 0:00)
+//	 * @param Cod_n Código del nivel resuelto
+//	 * @return True si se ha guardado con éxito, Falso en caso contrario
+//	 */
+//	public static boolean guardarEjercicio(int Cod_u, int tiempo, int Cod_n){
+//		return false;
+//	}
 	
 		/**
 		 * Introduce a un usuario en una posición del ranking dependiendo de cómo de bien ha resuelto el ejercicio
@@ -222,6 +252,7 @@ public class AccesosBD implements Serializable{
 	 * @return ArrayList<String> con los nombres de los niveles, en los nombres estará el numero del nivel + el nombre
 	 */
 	public static ArrayList<String> mostrarNiveles(String paquete, int Cod_u){
+		viewTableContent("TABLASBD");
 		ArrayList<String> a = new ArrayList<>();
 		return a;
 	}
@@ -247,12 +278,12 @@ public class AccesosBD implements Serializable{
 		        		createTable(tableName, rowInfo);
 		    		}
 		    		else if(s.equals("INTO") || s.equals("VIEW")){
-		    			final String sent = "SELECT * FROM TABLES;";
+		    			final String sentence = "SELECT * FROM TABLASBD;";
 		    			ResultSet resultado = null;
 		    			try {
-		    				resultado = statement.executeQuery(sent);
+		    				resultado = statement.executeQuery(sentence);
 		    			} catch (SQLException e) {
-		    				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent);
+		    				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sentence);
 		    				e.printStackTrace();
 		    			}
 		    			System.out.println("Choose a table:");
@@ -276,11 +307,14 @@ public class AccesosBD implements Serializable{
 			        		insertRowInto(row, tableName);
 		    			}
 		    			else{
-		    				viewTableContent(tableName);
+		    				ArrayList<String> content = viewTableContent(tableName);
+		    				for(String a : content){
+		    					System.out.println(a);
+		    				}
 		    			}
 		    		}
 		    		else if(s.equals("DEL")){
-		    			final String sent = "DELETE FROM TABLES WHERE TABLE_NAME = 'NIVELES'";
+		    			final String sent = "DROP TABLE JUGADORES;";
 		    			try {
 		    				statement.executeUpdate(sent);
 		    				System.out.println("Data deleted");
@@ -306,13 +340,14 @@ public class AccesosBD implements Serializable{
 			final String sent = "CREATE TABLE " + tableName + " (" + rowInfo + ");";
 			try {
 				statement.executeUpdate(sent);
-				insertRowInto("'" + tableName + "'", "TABLES");
+				insertRowInto("'" + tableName + "'", "TABLASBD");
 				System.out.println("Table created");
 			} catch (SQLException e) {
 				System.out.println("An error has occurred during the table creation");
 				e.printStackTrace();
 			}
 		}
+		
 		
 		/**
 		 * Método para rellenar tablas
@@ -330,25 +365,40 @@ public class AccesosBD implements Serializable{
 			}
 		}
 		
-		private static void viewTableContent(String tableName){
+		/**
+		 * Returns an array with the content of the table specified by parameters
+		 * @param tableName
+		 * @return
+		 */
+		private static ArrayList<String> viewTableContent(String tableName){
+			ArrayList<String> content = new ArrayList<>();
 			final String sent = "SELECT * FROM " + tableName + ";";
 			ResultSet resultado = null;
 			try {
 				resultado = statement.executeQuery(sent);
+				resultado.next();
 			} catch (SQLException e) {
 				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent);
 				e.printStackTrace();
 			}
 			try {
-				resultado.next();
 				do{
-					System.out.println(resultado.getString(1));
+					int i = 1;
+					try{
+						while(true){
+							content.add(resultado.getString(i));
+							i++;
+						}
+					}catch(SQLException e){
+						
+					}
 				}
 				while(resultado.next());
 			} catch (SQLException e) {
-				System.out.println("Error when trying next");
 				e.printStackTrace();
 			}
+
+			return content;
 		}
 	
 	/**

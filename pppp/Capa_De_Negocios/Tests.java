@@ -1,9 +1,10 @@
 package Capa_De_Negocios;
 
-import Capa_De_Negocios.ej_Deslizar.Ej_Deslizar;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import Ej_Deslizar.Ej_Deslizar;
 
 public class Tests {
 	

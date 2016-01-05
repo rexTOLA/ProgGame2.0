@@ -1,18 +1,16 @@
 package Capa_De_Negocios;
 
 public class ObjetoClase {
-
-	boolean alter;
-	String name;
+	
 	String code;
-	String rute;
+	String name;
+	boolean alter;
 	String cod_nivel;
 	
-	public ObjetoClase(boolean alter, String name, String code, String rute, String cod_nivel){
-		this.alter = alter;
-		this.name = name;
+	public ObjetoClase(String code, String name, boolean alter, String cod_nivel){
 		this.code = code;
-		this.rute = rute;
+		this.name = name;
+		this.alter = alter;
 		this.cod_nivel = cod_nivel;
 	}
 

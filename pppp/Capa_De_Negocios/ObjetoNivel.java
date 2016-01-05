@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class ObjetoNivel {
 
-	String name;
 	String code;
+	String name;
 	ArrayList<ObjetoClase> clases;
 	
-	public ObjetoNivel(String name, String code, ArrayList<ObjetoClase> clases){
-		this.name = name;
+	public ObjetoNivel(String code, String name, ArrayList<ObjetoClase> clases){
 		this.code = code;
+		this.name = name;
 		this.clases = clases;
 	}
 
