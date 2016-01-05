@@ -1,9 +1,7 @@
 package Capa_de_Presentacion;
 
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.Frame;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.JFrame;
@@ -13,6 +11,7 @@ import javax.swing.text.DefaultCaret;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
@@ -23,8 +22,6 @@ public class VentanaJuego extends JFrame {
 	private boolean lineaLeida = false;
 	protected JPanel contentPane;
 	protected JTextField tfLineaEntrada = new JTextField();
-	protected JTextArea textArea = new JTextArea();
-	protected JScrollPane scrollPane = new JScrollPane(textArea);
 	protected JTextArea taEnunciado = new JTextArea();
 	protected JScrollPane spEnunciado = new JScrollPane(taEnunciado);
 	protected JTextArea taSalida = new JTextArea();
@@ -47,7 +44,7 @@ public class VentanaJuego extends JFrame {
 		try{
 			UIManager.setLookAndFeel("com.nilo.plaf.nimrod.NimRODLookAndFeel");
 		}catch(Exception e){}
-			
+
 		VentanaJuego.init();
 		VentanaJuego.println("hola");
 
@@ -67,13 +64,15 @@ public class VentanaJuego extends JFrame {
 		setContentPane(contentPane);
 
 		tfLineaEntrada = new JTextField();
+
+		JPanel panel = new JPanel();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(12)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
+						.addContainerGap()
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(spSalida, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
 								.addComponent(spEnunciado, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
@@ -84,16 +83,30 @@ public class VentanaJuego extends JFrame {
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 						.addContainerGap()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 503, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
 								.addGroup(gl_contentPane.createSequentialGroup()
 										.addComponent(spEnunciado, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
 										.addComponent(spSalida, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 										.addComponent(tfLineaEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(37, Short.MAX_VALUE))
+						.addGap(37))
 				);
+
+
+		JTabbedPane tabbedPane = new JTabbedPane();
+
+		for (int i = 0; i < 6; i++) {
+			JTextArea textArea = new JTextArea();
+			JScrollPane scrollPane = new JScrollPane(textArea);
+			tabbedPane.addTab("One"+i, null, scrollPane, "Does nothing");
+		}
+
+
+		//Add the tabbed pane to this panel.
+		panel.setLayout(new GridLayout(1, 1)); 
+		panel.add(tabbedPane);
 
 
 		taSalida.setEditable(false);
@@ -152,8 +165,8 @@ public class VentanaJuego extends JFrame {
 		miVentana.setVisible( true );
 		miVentana.tfLineaEntrada.requestFocus();
 
-		Consola con=new Consola();
 
+		Consola con=new Consola();
 
 
 	}
