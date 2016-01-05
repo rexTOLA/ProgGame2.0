@@ -8,18 +8,24 @@ import Ej_Deslizar.Ej_Deslizar;
 
 public class Tests {
 	
-    public static void main(String[] args) {
-    	//Ejercicio deslizar
-    	try {
-			if(ejercicioDeslizar()){
-				//ejercicio superado
-			}
-			else{
-				//ejercicio no superado
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    public static void main(String cod_nivel) {
+    	switch(cod_nivel){
+    	case("N1"):
+    		//Ejercicio deslizar
+        	try {
+    			if(ejercicioDeslizar()){
+    				//ejercicio superado
+    			}
+    			else{
+    				//ejercicio no superado
+    			}
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    	break;
+    	
+    	}
+    	
     }
 	
 
