@@ -23,12 +23,15 @@ public class Tests {
     			e.printStackTrace();
     		}
     	break;
-    	
     	}
-    	
     }
 	
 
+    /**
+	 * método para ejecutar el ejercicio deslizar
+	 * @return
+	 * @throws IOException
+	 */
     public static boolean ejercicioDeslizar() throws IOException{
     	System.out.print("Move your character(X) to get to the exit (*). To move, type: Up: u; Down: d; Left: l; Right: r. And be carefull with the ice, you'll slide!!\n");
     	Ej_Deslizar ed = new Ej_Deslizar();
