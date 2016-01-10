@@ -247,11 +247,9 @@ public class AccesosBD implements Serializable{
 	
 	/**
 	 * Devuelve un ArrayList con los nombres de los niveles que haya en el paquete dado en los parámteros y con la información referente al usuario de cada uno
-	 * @param paquete Nombre del paquete
-	 * @param Cod_u Código del usuario que desdea ver los niveles disponibles
 	 * @return ArrayList<String> con los nombres de los niveles, en los nombres estará el numero del nivel + el nombre
 	 */
-	public static ArrayList<String> mostrarNiveles(String paquete, int Cod_u){
+	public static ArrayList<String> mostrarNiveles(){
 		viewTableContent("TABLASBD");
 		ArrayList<String> a = new ArrayList<>();
 		return a;

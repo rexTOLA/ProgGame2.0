@@ -5,25 +5,37 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Ej_Deslizar.Ej_Deslizar;
+import Ej_Walls.Ej_Walls;
 
 public class Tests {
 	
-    public static void main(String cod_nivel) {
+    public static void principal(String cod_nivel) {
     	switch(cod_nivel){
     	case("N1"):
     		//Ejercicio deslizar
         	try {
     			if(ejercicioDeslizar()){
-    				//ejercicio superado
+    				//ejercicio superado 
+    				
     			}
-    			else{
-    				//ejercicio no superado
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    	break;
+    	case("N2"):
+    		//Ejercicio deslizar
+        	try {
+    			if(ejercicioWalls()){
+    				//ejercicio superado 
+    				
     			}
     		} catch (IOException e) {
     			e.printStackTrace();
     		}
     	break;
     	}
+    	//guardar en la BD que el usuario en cuestion a superado el nivel
+		//mostrar al usuairo que ha superado el ejercicio
     }
 	
 
@@ -44,6 +56,21 @@ public class Tests {
 		while(!ed.move(s));	
     	
     	System.out.println("Congratulations!!! You won!!!");
+    	return true;
+    }
+    
+    public static boolean ejercicioWalls() throws IOException{
+		System.out.print("Mueve al personaje(8) para llegar a la salida(O). Para moverte usa wasd.\n");
+    	Ej_Walls ew = new Ej_Walls();
+    	String s;
+    	do{
+    		ew.printTablero();
+    		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    		s = br.readLine();
+    	}
+		while(!ew.checkMove(s));	
+    	
+    	System.out.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
     	return true;
     }
     
