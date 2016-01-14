@@ -2,11 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="nimrodlf.jar"/>
-	<classpathentry kind="lib" path="sqlite-jdbc-3.8.11.2.jar"/>
-	<classpathentry kind="lib" path="null"/>
 	<classpathentry kind="lib" path="Disfigure   Blank [NCS Release].mp3"/>
 	<classpathentry kind="lib" path="jl1.0.1.jar"/>
+	<classpathentry kind="lib" path="nimrodlf.jar"/>
 	<classpathentry kind="lib" path="NimRODThemeFile.theme"/>
+	<classpathentry kind="lib" path="null"/>
+	<classpathentry kind="lib" path="sqlite-jdbc-3.8.11.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

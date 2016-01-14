@@ -63,7 +63,7 @@ public class VentanaJuego extends JFrame {
 		VentanaJuego.init();
 		VentanaJuego.println("hola");
 		//Hace sonar la musica
-    /*    try {
+        try {
         	File musica = new File("Disfigure   Blank [NCS Release].mp3");
             FileInputStream fis = new FileInputStream(musica);
             BufferedInputStream bis = new BufferedInputStream(fis);
@@ -76,7 +76,7 @@ public class VentanaJuego extends JFrame {
         catch (FileNotFoundException e){
             e.printStackTrace();
         }
-*/
+
 	}
 
 	/**
