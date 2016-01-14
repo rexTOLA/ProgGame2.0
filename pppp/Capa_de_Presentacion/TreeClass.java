@@ -1,6 +1,11 @@
 package Capa_de_Presentacion;
 
 import java.awt.BorderLayout;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,6 +14,7 @@ import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.plaf.FileChooserUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class TreeClass extends JFrame {
@@ -61,7 +67,14 @@ public class TreeClass extends JFrame {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-                selectedLabel.setText(selectedNode.getUserObject().toString());
+               String algo="";
+                try {
+					algo=muestraContenido("ObjetoClase.java");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                selectedLabel.setText(algo);
                 
             }
         });
@@ -72,7 +85,17 @@ public class TreeClass extends JFrame {
         this.setVisible(true);
     }
 			
-    
+	public static String muestraContenido(String archivo) throws FileNotFoundException, IOException {
+        String cadena;
+        String ficheroEntero = "";
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        while((cadena = b.readLine())!=null) {
+            ficheroEntero=ficheroEntero+"\n"+cadena;
+        }
+        b.close();
+        return ficheroEntero;
+    }
 	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {

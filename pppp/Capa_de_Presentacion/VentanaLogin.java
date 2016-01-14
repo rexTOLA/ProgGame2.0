@@ -120,7 +120,6 @@ public class VentanaLogin extends JFrame {
 				contraseña=passwordField.getText();
 				setCod_u(AccesosBD.log(username, contraseña));
 				if(cod_u!=null){
-
 					VentanaJuego.init();
 				}else{
 					lblNewLabel.setText("Usuario o contraseña incorrecta");

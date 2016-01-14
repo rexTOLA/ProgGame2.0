@@ -98,6 +98,7 @@ public class VentanaJuego extends JFrame {
 		
 		
 		JButton btnCheck = new JButton("CHECK");
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
