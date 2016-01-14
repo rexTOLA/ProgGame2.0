@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.JButton;
-//ssd
+
 public class VentanaJuego extends JFrame {
 	protected static VentanaJuego miVentana = null;
 	private boolean lineaLeida = false;
