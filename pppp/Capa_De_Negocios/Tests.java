@@ -45,7 +45,7 @@ public class Tests {
 	 * @throws IOException
 	 */
     public static boolean ejercicioDeslizar() throws IOException{
-    	System.out.print("Move your character(X) to get to the exit (*). To move, type: Up: u; Down: d; Left: l; Right: r. And be carefull with the ice, you'll slide!!\n");
+    	System.out.print("Move your character(0) to get to the exit (*). To move, type: Up: u; Down: d; Left: l; Right: r. And be carefull with the ice, you'll slide!!\n");
     	Ej_Deslizar ed = new Ej_Deslizar();
     	String s;
     	do{
@@ -73,5 +73,7 @@ public class Tests {
     	System.out.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
     	return true;
     }
+    
+    
     
 }

@@ -5,5 +5,7 @@
 	<classpathentry kind="lib" path="nimrodlf.jar"/>
 	<classpathentry kind="lib" path="sqlite-jdbc-3.8.11.2.jar"/>
 	<classpathentry kind="lib" path="null"/>
+	<classpathentry kind="lib" path="jl1.0.1.jar"/>
+	<classpathentry kind="lib" path="Disfigure   Blank [NCS Release].mp3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

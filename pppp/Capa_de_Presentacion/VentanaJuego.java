@@ -4,10 +4,19 @@ package Capa_de_Presentacion;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
+
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
@@ -47,7 +56,20 @@ public class VentanaJuego extends JFrame {
 
 		VentanaJuego.init();
 		VentanaJuego.println("hola");
-
+		//Hace sonar la musica
+        try {
+        	File musica = new File("../Disfigure   Blank [NCS Release].mp3");
+            FileInputStream fis = new FileInputStream(musica);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            Player player = new Player(bis);
+            player.play();
+    }
+        catch (JavaLayerException e){
+            e.printStackTrace();
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
 
 	}
 
