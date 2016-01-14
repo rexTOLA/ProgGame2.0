@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Capa_de_Datos.AccesosBD;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -18,6 +21,11 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.logging.Logger;
 
 
 public class VentanaLogin extends JFrame {
@@ -25,6 +33,9 @@ public class VentanaLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	public String username;
+	public String contraseña;
+	public String cod_u;
 
 	/**
 	 * Launch the application.
@@ -33,7 +44,7 @@ public class VentanaLogin extends JFrame {
 		try{
 			UIManager.setLookAndFeel("com.nilo.plaf.nimrod.NimRODLookAndFeel");
 		}catch(Exception e){
-			
+
 		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,10 +56,34 @@ public class VentanaLogin extends JFrame {
 				}
 			}
 		});
-		
-		
-		
-		
+
+
+
+
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
+	public String getCod_u() {
+		return cod_u;
+	}
+
+	public void setCod_u(String cod_u) {
+		this.cod_u = cod_u;
 	}
 
 	/**
@@ -65,78 +100,112 @@ public class VentanaLogin extends JFrame {
 		contentPane.setForeground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		JLabel lblUsername = new JLabel("USERNAME");
 		lblUsername.setForeground(Color.ORANGE);
 		lblUsername.setFont(new Font("Power Red and Blue Intl", Font.BOLD, 20));
-		
+
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setForeground(Color.ORANGE);
 		lblPassword.setFont(new Font("Power Red and Blue Intl", Font.BOLD, 20));
-		
+		final JLabel lblNewLabel = new JLabel("Contraseña mala");
+		lblNewLabel.setVisible(false);
 		textField = new JTextField();
 		textField.setColumns(10);
-		
+
 		passwordField = new JPasswordField();
-		
+
 		JButton btnLogIn = new JButton("Log In");
-		
+		btnLogIn.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				username=textField.getText();
+				contraseña=passwordField.getText();
+				cod_u=AccesosBD.log(username, contraseña);
+				if(!cod_u.equals("")){
+					VentanaJuego.init();
+				}else{
+					lblNewLabel.setVisible(true);
+				}
+
+			}
+					
+		});
+
 		JButton btnSingIn = new JButton("Sing In");
-		
+		btnSingIn.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				username=textField.getText();
+				contraseña=passwordField.getText();
+				cod_u= AccesosBD.reg(username, contraseña);
+				VentanaJuego.init();
+
+			}
+		});
+
 		JPanel panel = new JPanel();
-		
+
 		JLabel lblProgGaming = new JLabel("PROG GAMING");
 		lblProgGaming.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProgGaming.setFont(new Font("Power Red and Blue Intl", Font.BOLD, 37));
+
+
+		lblNewLabel.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblUsername, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(btnLogIn, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(btnSingIn, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-									.addComponent(passwordField))))
-						.addComponent(lblProgGaming, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+						.addContainerGap()
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(lblUsername, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(textField, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+														.addGroup(gl_contentPane.createSequentialGroup()
+																.addComponent(btnLogIn, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+																.addPreferredGap(ComponentPlacement.UNRELATED)
+																.addComponent(btnSingIn, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+														.addComponent(passwordField))))
+								.addComponent(lblProgGaming, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(10)
+										.addComponent(lblNewLabel)))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(167, Short.MAX_VALUE))
+				);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblProgGaming, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addGap(37)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblUsername)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(31)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPassword))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnLogIn)
-						.addComponent(btnSingIn))
-					.addContainerGap(52, Short.MAX_VALUE))
+						.addContainerGap()
+						.addComponent(lblProgGaming, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+						.addGap(15)
+						.addComponent(lblNewLabel)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblUsername)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGap(31)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPassword))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnLogIn)
+								.addComponent(btnSingIn))
+						.addContainerGap(52, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(45)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(36))
-		);
-		
+						.addGap(45)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 170, Short.MAX_VALUE)
+						.addGap(36))
+				);
+
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(VentanaLogin.class.getResource("/Capa_de_Presentacion/logo160x160.png")));
 		panel.add(label);

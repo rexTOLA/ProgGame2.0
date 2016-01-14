@@ -1,34 +1,46 @@
 package Capa_de_Presentacion;
 
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.Frame;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
+
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
+import javax.swing.JTree;
 import javax.swing.UIManager;
-
+import javax.swing.JButton;
+//ssd
 public class VentanaJuego extends JFrame {
 	protected static VentanaJuego miVentana = null;
 	private boolean lineaLeida = false;
 	protected JPanel contentPane;
-	protected JTextField tfLineaEntrada = new JTextField();
+	protected JPanel panel;
 	protected JTextArea textArea = new JTextArea();
 	protected JScrollPane scrollPane = new JScrollPane(textArea);
+	protected JTextField tfLineaEntrada = new JTextField();
 	protected JTextArea taEnunciado = new JTextArea();
 	protected JScrollPane spEnunciado = new JScrollPane(taEnunciado);
 	protected JTextArea taSalida = new JTextArea();
 	protected JScrollPane spSalida = new JScrollPane(taSalida);
+	public String cod_u;
 
 	/**
 	 * Launch the application.
@@ -47,11 +59,24 @@ public class VentanaJuego extends JFrame {
 		try{
 			UIManager.setLookAndFeel("com.nilo.plaf.nimrod.NimRODLookAndFeel");
 		}catch(Exception e){}
-			
+
 		VentanaJuego.init();
 		VentanaJuego.println("hola");
-
-
+		//Hace sonar la musica
+    /*    try {
+        	File musica = new File("Disfigure   Blank [NCS Release].mp3");
+            FileInputStream fis = new FileInputStream(musica);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            Player player = new Player(bis);
+            player.play();
+    }
+        catch (JavaLayerException e){
+            e.printStackTrace();
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+*/
 	}
 
 	/**
@@ -65,35 +90,59 @@ public class VentanaJuego extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		panel= new JPanel();
 
 		tfLineaEntrada = new JTextField();
+
+		
+		
+		JButton btnCheck = new JButton("PLAY");
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(12)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnCheck, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(spSalida, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
 								.addComponent(spEnunciado, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-								.addComponent(tfLineaEntrada, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
-						.addContainerGap())
-				);
+								.addComponent(tfLineaEntrada, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))))
+					.addContainerGap())
+		);
 		gl_contentPane.setVerticalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 503, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(spEnunciado, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(spSalida, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(tfLineaEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(37, Short.MAX_VALUE))
-				);
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(spEnunciado, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(spSalida, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+							.addComponent(tfLineaEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnCheck)
+					.addGap(8))
+		);
+
+
+		JTabbedPane tabbedPane = new JTabbedPane();
+		
+		tabbedPane.addTab("Class", null, scrollPane, null);
+		//TreeClass treeClass= new TreeClass();
+		//tabbedPane.addTab("Class Folder", null, treeClass, null);
+	
+
+
+		//Add the tabbed pane to this panel.
+		panel.setLayout(new GridLayout(1, 1)); 
+		panel.add(tabbedPane);
 
 
 		taSalida.setEditable(false);
@@ -151,9 +200,9 @@ public class VentanaJuego extends JFrame {
 		miVentana = new VentanaJuego();
 		miVentana.setVisible( true );
 		miVentana.tfLineaEntrada.requestFocus();
+		
 
 		Consola con=new Consola();
-
 
 
 	}
