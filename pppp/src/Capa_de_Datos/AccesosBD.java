@@ -62,7 +62,7 @@ public class AccesosBD implements Serializable{
 	public static String reg(String nombre, String pass){
 		abrirConex();
 		String a = "COD_" + nombre;
-		String b = a + ", " + nombre + ", " + pass;
+		String b = "'" + a + "', '" + nombre + "', '" + pass + "'";
 		insertRowInto(b, "JUGADORES");
 		cerrarConex();
 		return a;
@@ -76,7 +76,7 @@ public class AccesosBD implements Serializable{
 	 */
 	public static String log(String nombre, String pass){
 		abrirConex();
-		final String sent1 = "SELECT COD_JUG FROM JUGADORES WHERE USUARIO = '" + nombre + "' AND PASS = '" + nombre + "';";
+		final String sent1 = "SELECT COD_JUG FROM JUGADORES WHERE USUARIO = '" + nombre + "' AND PASS = '" + pass + "';";
 		ResultSet resultado = null;
 		try {
 			resultado = statement.executeQuery(sent1);
@@ -149,7 +149,7 @@ public class AccesosBD implements Serializable{
 			ArrayList<ObjetoClase> clasesDeN = new ArrayList<>();
 			try {
 				while(resultado.next()){
-					ObjetoClase oClase = crearClase(resultado.getString(1));
+					ObjetoClase oClase = crearClase(resultado.getString(1), nom_nivel);
 					clasesDeN.add(oClase);
 				}
 			} catch (SQLException e) {
@@ -164,7 +164,7 @@ public class AccesosBD implements Serializable{
 		 * @param cod_clase
 		 * @return
 		 */
-		private static ObjetoClase crearClase(String cod_clase){
+		private static ObjetoClase crearClase(String cod_clase, String nom_nivel){
 			final String sent = "SELECT * FROM CLASES WHERE COD_CLASE = '" + cod_clase + "';";
 			ResultSet resultado = null;
 			try {
@@ -185,7 +185,8 @@ public class AccesosBD implements Serializable{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			ObjetoClase oClase = new ObjetoClase(cod_clase, nom_clase, alterable, cod_nivel);
+			String ruta = "src/" + nom_nivel + "/" + nom_clase;
+			ObjetoClase oClase = new ObjetoClase(cod_clase, nom_clase, alterable, cod_nivel, ruta);
 			return oClase;
 		}
 		

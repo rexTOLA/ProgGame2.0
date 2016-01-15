@@ -1,9 +1,5 @@
 package Ej_Walls;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class Ej_Walls {
 	
 	Tile ph = new Pared ('-');
@@ -47,21 +43,6 @@ public class Ej_Walls {
 		x = cord.x;
 		y = cord.y;
 		return p.moverPersonaje(tablero, x, y);
-	}
-	
-	public static void main (String args[]) throws IOException{
-		System.out.print("Move your character(8) to get to the exit (O). To move use wasd.\n");
-    	Ej_Walls ew = new Ej_Walls();
-    	String s;
-    	do{
-    		ew.printTablero();
-    		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    		s = br.readLine();
-    	}
-		while(!ew.checkMove(s));	
-    	
-    	System.out.println("Congratulations!!! You won!!!");
-//    	return true;
 	}
 
 }

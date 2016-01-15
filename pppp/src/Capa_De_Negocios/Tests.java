@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import Ej_Deslizar.Ej_Deslizar;
 import Ej_Walls.Ej_Walls;
+import Ej_Enemigos.Ej_Enemigo;
 
 public class Tests {
 	
@@ -33,6 +34,17 @@ public class Tests {
     			e.printStackTrace();
     		}
     	break;
+    	case("N3"):
+    		//Ejercicio deslizar
+        	try {
+    			if(ejercicioEnemigos()){
+    				//ejercicio superado 
+    				
+    			}
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    	break;
     	}
     	//guardar en la BD que el usuario en cuestion a superado el nivel
 		//mostrar al usuairo que ha superado el ejercicio
@@ -45,7 +57,7 @@ public class Tests {
 	 * @throws IOException
 	 */
     public static boolean ejercicioDeslizar() throws IOException{
-    	System.out.print("Move your character(0) to get to the exit (*). To move, type: Up: u; Down: d; Left: l; Right: r. And be carefull with the ice, you'll slide!!\n");
+    	System.out.print("Mueve al personaje(0) para llegar a la salida(*). Para moverte usa wasd. Y cuidado con el hielo, ¡resvala!\n");
     	Ej_Deslizar ed = new Ej_Deslizar();
     	String s;
     	do{
@@ -55,12 +67,12 @@ public class Tests {
     	}
 		while(!ed.move(s));	
     	
-    	System.out.println("Congratulations!!! You won!!!");
+    	System.out.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
     	return true;
     }
     
     public static boolean ejercicioWalls() throws IOException{
-		System.out.print("Mueve al personaje(8) para llegar a la salida(O). Para moverte usa wasd.\n");
+		System.out.print("Mueve al personaje(8) para llegar a la salida(O). Para moverte usa wasd, si puedes...\n");
     	Ej_Walls ew = new Ej_Walls();
     	String s;
     	do{
@@ -74,6 +86,30 @@ public class Tests {
     	return true;
     }
     
+    public static boolean ejercicioEnemigos() throws IOException{
+		System.out.print("Mueve al personaje(o) para llegar a la salida($). Para moverte usa wasd. Y cuidado con los enemigos, si te ven, ¡te dispararán!\n");
+    	Ej_Enemigo en = new Ej_Enemigo();
+    	String s;
+    	int fin = 0;
+    	do{
+    		en.printTablero();
+    		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    		s = br.readLine();
+    		fin = en.checkMove(s);
+    	}
+		while(fin == 0);	
+    	if(fin == 1){
+    		System.out.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
+        	return true;
+    	}
+    	else{
+    		System.out.println("¡Oh, no! ¡Has muerto!");
+    		return false;
+    	}
+    }
     
+    public static void main(String args[]){
+    	principal("N3");
+    }
     
 }

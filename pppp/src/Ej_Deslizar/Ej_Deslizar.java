@@ -38,16 +38,16 @@ public class Ej_Deslizar {
 	}
 	public boolean move(String movement){
 		switch(movement){
-		case ("u"):
+		case ("w"):
 			p.moveUp();
 			break;
-		case("d"):
+		case("s"):
 			p.moveDown();
 			break;
-		case("l"):
+		case("a"):
 			p.moveLeft();
 			break;
-		case("r"):
+		case("d"):
 			p.moveRight();
 			break;
 		default:

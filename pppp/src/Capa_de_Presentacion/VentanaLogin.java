@@ -117,6 +117,7 @@ public class VentanaLogin extends JFrame {
 
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener(){
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				username=textField.getText();
@@ -134,6 +135,7 @@ public class VentanaLogin extends JFrame {
 
 		JButton btnSingIn = new JButton("Sing In");
 		btnSingIn.addActionListener(new ActionListener(){
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				username=textField.getText();

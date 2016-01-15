@@ -1,12 +1,11 @@
-package Ej_Walls;
+package Ej_Enemigos;
 
 public class Personaje extends ObjetoJuego{
 	 
 	private Coordenada cord;
 
-	//Janette
 	public Personaje() {
-		super('8');
+		super('o');
 		cord = new Coordenada(1, 3);
 	}
 	
@@ -19,7 +18,7 @@ public class Personaje extends ObjetoJuego{
 	}
 
 	public boolean moverPersonaje(Tile[][] tablero, int x, int y){
-		if(y<9 && y>=0 && x<7 && x>=0){
+		if(y<9 && y>=0 && x<9 && x>=0){
 			if(tablero[y][x].go() == Tile.GO){
 				cord = new Coordenada(x, y);
 			}

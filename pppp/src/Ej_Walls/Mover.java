@@ -16,10 +16,6 @@ public class Mover {
 		case("d"):
 			cord.x++;
 			break;
-//		case("e"):
-//			cord.x++;
-//			cord.y--;
-//			break;
 		default:
 			System.out.println("Movimiento no válido");
 			return false;
