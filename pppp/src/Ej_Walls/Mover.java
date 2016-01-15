@@ -13,7 +13,7 @@ public class Mover {
 		case("a"):
 			cord.x--;
 			break;
-		case("d"):
+		case("d"): 
 			cord.x++;
 			break;
 		default:
