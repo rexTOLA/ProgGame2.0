@@ -125,6 +125,7 @@ public class VentanaLogin extends JFrame {
 				cod_u=AccesosBD.log(username, contraseña);
 				if(!cod_u.equals("")){
 					VentanaJuego.init();
+					dispose();
 				}else{
 					lblNewLabel.setVisible(true);
 				}
@@ -142,7 +143,7 @@ public class VentanaLogin extends JFrame {
 				contraseña=passwordField.getText();
 				cod_u= AccesosBD.reg(username, contraseña);
 				VentanaJuego.init();
-
+				dispose();
 			}
 		});
 
