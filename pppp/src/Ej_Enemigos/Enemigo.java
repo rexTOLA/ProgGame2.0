@@ -1,6 +1,6 @@
 package Ej_Enemigos;
 
-public class Enemigo extends Tile{
+public class Enemigo extends Tile implements Printeable{
 
 	final int MAX_RANGE = 6;
 	private Coordenada coord;
@@ -24,7 +24,7 @@ public class Enemigo extends Tile{
 	
 	@Override
 	public int go() {
-		return STOP;
+		return DIE;
 	}
 	
 }

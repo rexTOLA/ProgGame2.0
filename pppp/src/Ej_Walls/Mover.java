@@ -14,11 +14,10 @@ public class Mover {
 			cord.x--;
 			break;
 		case("d"): 
-			cord.x++;
+			cord.x = cord.x + 2; 
 			break;
 		default:
 			System.out.println("Movimiento no válido");
-			return false;
 		}
 		return true;
 	}

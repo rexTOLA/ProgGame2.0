@@ -19,7 +19,7 @@ public class Personaje extends ObjetoJuego{
 	}
 
 	public boolean moverPersonaje(Tile[][] tablero, int x, int y){
-		if(y<9 && y>=0 && x<7 && x>=0){
+		if(y<7 && y>=0 && x<9 && x>=0){
 			if(tablero[y][x].go() == Tile.GO){
 				cord = new Coordenada(x, y);
 			}

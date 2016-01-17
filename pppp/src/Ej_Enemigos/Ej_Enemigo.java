@@ -2,8 +2,31 @@ package Ej_Enemigos;
 
 public class Ej_Enemigo {
 
-	Tablero tablero = new Tablero();
-	Personaje p = new Personaje();
+	Tablero tablero;
+	Personaje p;
+	Enemigo e1;
+	Enemigo e2;
+	Enemigo e3;
+	Salida s;
+	Printeable[][] tab2 = new Printeable[9][9];
+	
+	public Ej_Enemigo(){
+		tablero = new Tablero();
+		p = new Personaje();
+		e1 = new Enemigo(new Coordenada(2, 7));
+		e2 = new Enemigo(new Coordenada(4, 6));
+		e3 = new Enemigo(new Coordenada(6, 5));
+		s = new Salida();
+		tab2[p.getX()][p.getY()] = p;
+		tab2[e1.getX()][e1.getY()] = e1;
+		tab2[e2.getX()][e2.getY()] = e2;
+		tab2[e3.getX()][e3.getY()] = e3;
+		tab2[s.getX()][s.getY()] = s;
+	}
+	
+	public Printeable checkPrinteable(int x, int y){
+		return tab2[y][x];
+	}
 	
 	/**
 	 * 
@@ -19,11 +42,15 @@ public class Ej_Enemigo {
 		}
 		x = cord.x;
 		y = cord.y;
-		if(p.moverPersonaje(tablero.tab, x, y)){
+		switch(p.moverPersonaje(tablero.tab, x, y, tab2)){
+		case(Tile.DIE):
+			return 2;
+		case(Tile.WIN):
 			return 1;
+		default:
+			break;
 		}
-		//disparar
-		if(disparar(tablero.e1) || disparar(tablero.e2) || disparar(tablero.e3)){
+		if(disparar(e1) || disparar(e2) || disparar(e3)){
 			return 2;
 		}
 		return 0;
@@ -34,8 +61,7 @@ public class Ej_Enemigo {
 	 * @param t
 	 * @return True si se ha disparado, False si no se ha disparado
 	 */
-	public boolean disparar(Tile t){
-		Enemigo e = (Enemigo)t;
+	public boolean disparar(Enemigo e){
 		if(p.getX() == e.getX()){
 			if(p.getY()<e.getY()){
 				int i = e.getSafeRange();
@@ -69,7 +95,7 @@ public class Ej_Enemigo {
 	}
 	
 	public void printTablero(){
-		tablero.printTablero(p);
+		tablero.printTablero(this);
 	}
 	
 }

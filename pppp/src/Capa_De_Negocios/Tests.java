@@ -79,15 +79,15 @@ public class Tests {
     		ew.printTablero();
     		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     		s = br.readLine();
-    	}
-		while(!ew.checkMove(s));	
+    	}while(!ew.checkMove(s));	
     	
     	System.out.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
     	return true;
     }
     
     public static boolean ejercicioEnemigos() throws IOException{
-		System.out.print("Mueve al personaje(o) para llegar a la salida($). Para moverte usa wasd. Y cuidado con los enemigos, si te ven, ¡te dispararán!\n");
+		System.out.print("Mueve al personaje(p) para llegar a la salida($). Para moverte usa wasd. Atento a los agujeros, no vaya a ser que te caigas."
+				+ " Y cuidado con los enemigos, si te ven, ¡te dispararán!\n");
     	Ej_Enemigo en = new Ej_Enemigo();
     	String s;
     	int fin = 0;

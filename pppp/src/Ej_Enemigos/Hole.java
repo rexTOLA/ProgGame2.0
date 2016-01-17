@@ -1,13 +1,13 @@
 package Ej_Enemigos;
 
-public class Pared extends Tile {
+public class Hole extends Tile {
 
-	public Pared(Character type){
+	public Hole(Character type){
 		super(type);
 	}
 
 	@Override
 	public int go() {
-		return STOP;
+		return DIE;
 	}
 }

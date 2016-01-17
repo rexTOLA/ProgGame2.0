@@ -2,7 +2,7 @@ package Ej_Enemigos;
 
 public class Tile extends ObjetoJuego{
 
-	final static int STOP = 0;
+	final static int DIE = 0;
 	final static int GO = 1;
 	final static int WIN = 2;
 
