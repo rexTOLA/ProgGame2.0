@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Ej_Deslizar.Ej_Deslizar;
+import Ej_Enemigo.Ej_Enemigo;
 import Ej_Walls.Ej_Walls;
-import Ej_Enemigos.Ej_Enemigo;
 
 public class Tests {
 	

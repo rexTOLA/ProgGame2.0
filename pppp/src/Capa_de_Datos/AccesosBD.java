@@ -316,7 +316,7 @@ public class AccesosBD implements Serializable{
 		    			}
 		    		}
 		    		else if(s.equals("DEL")){
-		    			final String sent = "DROP TABLE JUGADORES;";
+		    			final String sent = "DELETE FROM TABLASBD WHERE NOM_TABLA='L';";
 		    			try {
 		    				statement.executeUpdate(sent);
 		    				System.out.println("Data deleted");

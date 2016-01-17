@@ -1,4 +1,4 @@
-package Ej_Enemigos;
+package Ej_Enemigo;
 
 public class Ej_Enemigo {
 
