@@ -51,7 +51,7 @@ public class Tests {
 		//mostrar al usuairo que ha superado el ejercicio
     	return false;
     	//Si devuelve true:
-//    	AccesosBD.resueltos(cod_nivel, cod_jug);
+//    	AccesosBD.resueltos(cod_nivel, cod_u);
     }
 	
 

@@ -152,6 +152,7 @@ public class VentanaLogin extends JFrame {
 		JPanel panel = new JPanel();
 
 		JLabel lblProgGaming = new JLabel("PROG GAMING");
+		lblProgGaming.setForeground(Color.ORANGE);
 		lblProgGaming.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProgGaming.setFont(new Font("Power Red and Blue Intl", Font.BOLD, 37));
 

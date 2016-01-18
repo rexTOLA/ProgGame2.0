@@ -10,12 +10,15 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
@@ -23,12 +26,15 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.DefaultCaret;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import Capa_De_Negocios.ObjetoClase;
+import Capa_De_Negocios.ObjetoNivel;
 import Capa_De_Negocios.Tests;
 import Capa_de_Datos.AccesosBD;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -47,7 +53,7 @@ public class VentanaJuego extends JFrame {
 	protected JPanel panel;
 	protected static JTree tree;
 	protected static JTextArea textArea = new JTextArea();
-	protected JScrollPane scrollPane = new JScrollPane(textArea);
+	protected static JScrollPane scrollPane = new JScrollPane(textArea);
 	protected JTextField tfLineaEntrada = new JTextField();
 	protected JTextArea taEnunciado = new JTextArea();
 	protected JScrollPane spEnunciado = new JScrollPane(taEnunciado);
@@ -57,6 +63,7 @@ public class VentanaJuego extends JFrame {
 	protected static DefaultMutableTreeNode selectedNode;
 	protected static String nom_nivel;
 	protected static JTabbedPane tabbedPane;
+	protected static boolean editable=false;
 
 
 	/**
@@ -119,6 +126,9 @@ public class VentanaJuego extends JFrame {
 		btnCheck.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
+				ObjetoNivel nivel=AccesosBD.getNivel(nom_nivel);
+				Tests.principal(nivel.code);
+
 
 			}
 		});
@@ -191,8 +201,8 @@ public class VentanaJuego extends JFrame {
 	}
 
 	public static void crearTree(String nom_nivel){
-		switch (nom_nivel) {
-		case "Ej_Deslizar":{//create the root node
+		/*switch (nom_nivel) {
+		case "EJ_DESLIZAR":{//create the root node
 			DefaultMutableTreeNode root = new DefaultMutableTreeNode("Nivel Deslizar");
 			//create the child nodes
 			DefaultMutableTreeNode EJ_Deslizar = new DefaultMutableTreeNode("EJ_Deslizar");
@@ -223,7 +233,7 @@ public class VentanaJuego extends JFrame {
 
 		}	
 		break;
-		case "Ej_Enemigos":{//create the root node
+		case "EJ_ENEMIGO":{//create the root node
 			DefaultMutableTreeNode root = new DefaultMutableTreeNode("Nivel Enemigos");
 			//create the child nodes
 			DefaultMutableTreeNode Coordenada = new DefaultMutableTreeNode("Coordenada");
@@ -256,7 +266,7 @@ public class VentanaJuego extends JFrame {
 
 		}	
 		break;
-		case "Ej_Walls":{
+		case "EJ_WALLS":{
 
 			//create the root node
 			DefaultMutableTreeNode root = new DefaultMutableTreeNode("Nivel Walls");
@@ -292,29 +302,59 @@ public class VentanaJuego extends JFrame {
 		seleccionarNivel();
 		}
 		break;
-		}
-		tree.setShowsRootHandles(true);
-		tree.setRootVisible(true);
+		}*/
 
-		tree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
-			@Override
-			public void valueChanged(TreeSelectionEvent e) {
-				selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 
-				String algo="";
-				try {
-					algo=muestraContenido();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+		//falta el if
+			ObjetoNivel nivel=AccesosBD.getNivel(nom_nivel);
+
+			ArrayList<ObjetoClase> clasearray= nivel.clases;
+			DefaultMutableTreeNode root = new DefaultMutableTreeNode(nivel.name);
+
+			for(ObjetoClase ob: clasearray){
+				root.add(new DefaultMutableTreeNode(ob.name));
+				if (ob.alter==true) {
+					editable=true;
+				}else{
+					editable=false;
 				}
-				textArea.setText(algo);
-
 			}
-		});
+			tree = new JTree(root);
 
 
-		tabbedPane.addTab("Class Folder",null,tree,null);
+
+			tree.setShowsRootHandles(true);
+			tree.setRootVisible(true);
+
+			tree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
+				@Override
+				public void valueChanged(TreeSelectionEvent e) {
+					selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+
+
+					String algo="";
+					try {
+						algo=muestraContenido();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					textArea.setEditable(editable);
+					textArea.setText(algo);
+
+
+				}
+			});
+
+
+			tabbedPane.addTab("Class Folder",null,tree,null);
+			
+	//else		
+		VentanaJuego.println("Nombre del nivel incorrecto\n");
+		seleccionarNivel();
+		
+
 	}
 
 
@@ -363,14 +403,18 @@ public class VentanaJuego extends JFrame {
 		return ficheroEntero;
 	}
 
-	public static void guardarContenido() throws IOException{
+	public static void guardarContenido(String ruta) throws IOException{
 		String cadena;
 		String ficheroEntero = "";
-		File fil=new File("src/"+nom_nivel+"/"+selectedNode.getUserObject().toString()+".java");
-		FileWriter fw = new FileWriter(fil);
-		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(ficheroEntero);
-		bw.close();
+		try{
+
+			FileOutputStream fos = new FileOutputStream(ruta);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(clase);
+			oos.close();
+		} catch (IOException e){
+			System.out.println("ERROR");
+		}
 
 	}
 
@@ -403,20 +447,21 @@ public class VentanaJuego extends JFrame {
 
 	private static void seleccionarNivel(){
 		VentanaJuego.println("Elige el tipo de nivel que deseas\n");
+		for (int i = 0; i < AccesosBD.mostrarNiveles().size(); i++) {
 
-		VentanaJuego.println("Ej_Deslizar\nEj_Enemigos\nEj_Walls");
-
-		
+			VentanaJuego.println("-"+AccesosBD.mostrarNiveles().get(i)+": "+AccesosBD.mostrarNiveles().get(i+1));
+			i++;
+		}
 
 		VentanaJuego.println("\n\nPara ir atrás escriba back");
 		nom_nivel=VentanaJuego.readLine();
 		crearTree(nom_nivel);
-		cargarNivel(nom_nivel);
+		//cargarNivel(nom_nivel);
 
 
 	}
 
-	private static void cargarNivel(String nom_nivel){
+	/*	private static void cargarNivel(String nom_nivel){
 		switch (nom_nivel) {
 		case "Ej_Deslizar": try {
 			Tests.ejercicioDeslizar();
@@ -448,7 +493,7 @@ public class VentanaJuego extends JFrame {
 		}
 
 	}
-
+	 */
 
 	static public void init() {
 
