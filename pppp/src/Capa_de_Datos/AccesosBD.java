@@ -160,6 +160,7 @@ public class AccesosBD implements Serializable{
                 ObjetoClase oClase = crearClase(cod, nom_nivel);
                 clasesDeN.add(oClase);
             }
+            nom_nivel = estandarizar(nom_nivel);
             ObjetoNivel oNivel = new ObjetoNivel(cod_nivel, nom_nivel, clasesDeN);
             return oNivel;
         }
@@ -241,7 +242,8 @@ public class AccesosBD implements Serializable{
 //		}
 	
 	
-	public static boolean resueltos(String Cod_nivel, String Cod_jug){
+	public static boolean resueltos(String Nom_nivel, String Cod_jug){
+		String Cod_nivel = traductorNivel(Nom_nivel);
 		insertRowInto("'" + Cod_nivel + "', '" + Cod_jug + "'", "RESUELTOS");
 		return true;
 	}
@@ -314,7 +316,7 @@ public class AccesosBD implements Serializable{
 		    			}
 		    		}
 		    		else if(s.equals("DEL")){
-		    			final String sent = "UPDATE CLASES SET NOM_CLASE = 'PERSONAJE' WHERE COD_CLASE = 'N2C6';";
+		    			final String sent = "DELETE FROM RESUELTOS WHERE COD_NIVEL = 'N1';";
 		    			try {
 		    				statement.executeUpdate(sent);
 		    				System.out.println("Data deleted");
@@ -386,7 +388,9 @@ public class AccesosBD implements Serializable{
 					int i = 1;
 					try{
 						while(true){
-							content.add(resultado.getString(i));
+							String a = resultado.getString(i);
+							a = estandarizar(a);
+							content.add(a);
 							i++;
 						}
 					}catch(SQLException e){
