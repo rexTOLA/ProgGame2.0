@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import Capa_de_Presentacion.VentanaJuego;
 import Ej_Deslizar.Ej_Deslizar;
 import Ej_Enemigo.Ej_Enemigo;
 import Ej_Walls.Ej_Walls;
@@ -57,7 +58,7 @@ public class Tests {
 	 * @throws IOException
 	 */
     public static boolean ejercicioDeslizar() throws IOException{
-    	System.out.print("Mueve al personaje(0) para llegar a la salida(*). Para moverte usa wasd. Y cuidado con el hielo, ¡resvala!\n");
+    	VentanaJuego.printEnunciado("Mueve al personaje(0) para llegar a la salida(*).\n Para moverte usa wasd. Y cuidado con el hielo,\n ¡resvala!\n");
     	Ej_Deslizar ed = new Ej_Deslizar();
     	String s;
     	do{
@@ -67,12 +68,12 @@ public class Tests {
     	}
 		while(!ed.move(s));	
     	
-    	System.out.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
+    	VentanaJuego.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
     	return true;
     }
     
     public static boolean ejercicioWalls() throws IOException{
-		System.out.print("Mueve al personaje(8) para llegar a la salida(O). Para moverte usa wasd, si puedes...\n");
+    	VentanaJuego.printEnunciado("Mueve al personaje(8) para llegar a la salida(O).\n Para moverte usa wasd, si puedes...\n");
     	Ej_Walls ew = new Ej_Walls();
     	String s;
     	do{
@@ -81,12 +82,12 @@ public class Tests {
     		s = br.readLine();
     	}while(!ew.checkMove(s));	
     	
-    	System.out.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
+    	VentanaJuego.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
     	return true;
     }
     
     public static boolean ejercicioEnemigos() throws IOException{
-		System.out.print("Mueve al personaje(p) para llegar a la salida($). Para moverte usa wasd. Atento a los agujeros, no vaya a ser que te caigas."
+    	VentanaJuego.printEnunciado("Mueve al personaje(p) para llegar a la salida($).\n Para moverte usa wasd.\n Atento a los agujeros, no vaya a ser que te caigas.\n"
 				+ " Y cuidado con los enemigos, si te ven, ¡te dispararán!\n");
     	Ej_Enemigo en = new Ej_Enemigo();
     	String s;
@@ -99,11 +100,11 @@ public class Tests {
     	}
 		while(fin == 0);	
     	if(fin == 1){
-    		System.out.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
+        	VentanaJuego.println("¡¡¡Enhorabuena!!! ¡¡¡Has ganado!!!");
         	return true;
     	}
     	else{
-    		System.out.println("¡Oh, no! ¡Has muerto!");
+    		VentanaJuego.println("¡Oh, no! ¡Has muerto!");
     		return false;
     	}
     }

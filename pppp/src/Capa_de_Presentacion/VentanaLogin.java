@@ -120,18 +120,20 @@ public class VentanaLogin extends JFrame {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				username=textField.getText();
 				contraseña=passwordField.getText();
 				cod_u=AccesosBD.log(username, contraseña);
 				if(!cod_u.equals("")){
-					VentanaJuego.init();
 					dispose();
+					VentanaJuego.init();
+
 				}else{
 					lblNewLabel.setVisible(true);
 				}
 
 			}
-					
+
 		});
 
 		JButton btnSingIn = new JButton("Sing In");
@@ -142,8 +144,8 @@ public class VentanaLogin extends JFrame {
 				username=textField.getText();
 				contraseña=passwordField.getText();
 				cod_u= AccesosBD.reg(username, contraseña);
-				VentanaJuego.init();
 				dispose();
+				VentanaJuego.init();
 			}
 		});
 
