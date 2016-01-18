@@ -190,9 +190,19 @@ public class AccesosBD implements Serializable{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			nom_nivel = estandarizar(nom_nivel);
+			nom_clase = estandarizar(nom_clase);
 			String ruta = "src/" + nom_nivel + "/" + nom_clase;
 			ObjetoClase oClase = new ObjetoClase(cod_clase, nom_clase, alterable, cod_nivel, ruta);
 			return oClase;
+		}
+		
+		private static String estandarizar(String nombre){
+			String primLetra = nombre.substring(0, 1);
+			String segLetra = nombre.substring(1);
+			segLetra = segLetra.toLowerCase();
+			nombre = primLetra + segLetra;
+			return nombre;
 		}
 		
 		/**
@@ -401,9 +411,9 @@ public class AccesosBD implements Serializable{
 	 * @param args
 	 */
 	public static void main(String args[]){
-		abrirConex();
-//		ObjetoNivel on = crearNivel("N2", "EJ_WALLS");
-		generateTables();
-		cerrarConex();
+//		abrirConex();
+//		generateTables();
+//		cerrarConex();
+		ObjetoNivel on = getNivel("Ej_Walls");
 	}
 }
