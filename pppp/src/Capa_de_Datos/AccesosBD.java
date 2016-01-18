@@ -115,7 +115,7 @@ public class AccesosBD implements Serializable{
 		 * @return Códgio del nivel
 		 */
 		private static String traductorNivel(String nivel){
-			final String sent1 = "SELECT COD_NIVEL FROM NIVELES WHERE NOMBRE_NIVEL = '" + nivel + "';";
+			final String sent1 = "SELECT COD_NIVEL FROM NIVELES WHERE NOM_NIVEL = '" + nivel + "';";
 			ResultSet resultado = null;
 			try {
 				resultado = statement.executeQuery(sent1);
@@ -133,31 +133,35 @@ public class AccesosBD implements Serializable{
 		}
 
 		/**
-		 * Crea un objeto Nivel con la información del nivel referenciado por parámetros que saca de la BD
-		 * @param cod_nivel Código del nivel
-		 * @return
-		 */
-		private static ObjetoNivel crearNivel(String cod_nivel, String nom_nivel){
-			final String sent = "SELECT COD_CLASE FROM CLASES WHERE COD_NIVEL = '" + cod_nivel + "';";
-			ResultSet resultado = null;
-			try {
-				resultado = statement.executeQuery(sent);
-			} catch (SQLException e) {
-				System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent);
-				e.printStackTrace();
-			}
-			ArrayList<ObjetoClase> clasesDeN = new ArrayList<>();
-			try {
-				while(resultado.next()){
-					ObjetoClase oClase = crearClase(resultado.getString(1), nom_nivel);
-					clasesDeN.add(oClase);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			ObjetoNivel oNivel = new ObjetoNivel(cod_nivel, nom_nivel, clasesDeN);
-			return oNivel;
-		}
+         * Crea un objeto Nivel con la información del nivel referenciado por parámetros que saca de la BD
+         * @param cod_nivel Código del nivel
+         * @return
+         */
+        private static ObjetoNivel crearNivel(String cod_nivel, String nom_nivel){
+            final String sent = "SELECT COD_CLASE FROM CLASES WHERE COD_NIVEL = '" + cod_nivel + "';";
+            ResultSet resultado = null;
+            try {
+                resultado = statement.executeQuery(sent);
+            } catch (SQLException e) {
+                System.out.println( "Error al intentar recuperar datos de la BD a través de la sentencia: " + sent);
+                e.printStackTrace();
+            }
+            ArrayList<ObjetoClase> clasesDeN = new ArrayList<>();
+            ArrayList<String> contenido = new ArrayList<>();
+            try {
+            	while(resultado.next()){
+                	contenido.add(resultado.getString(1));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            for(String cod : contenido){
+                ObjetoClase oClase = crearClase(cod, nom_nivel);
+                clasesDeN.add(oClase);
+            }
+            ObjetoNivel oNivel = new ObjetoNivel(cod_nivel, nom_nivel, clasesDeN);
+            return oNivel;
+        }
 
 		/**
 		 * Crea un objeto Clase sacando de la BD la infromación de la clase cuyo código recive por prámetros
@@ -225,17 +229,6 @@ public class AccesosBD implements Serializable{
 //			return clase;
 //		}
 	
-//	/**
-//	 * Guarda un ejercicio en el ordenador del usuario con las modificaciones que ha hecho respecto al original
-//	 * @param Cod_u Código del usuario que ha realizado el ejericio
-//	 * @param tiempo Tiempo en el que lo a realizado (si ha sido completado con éxito, si no 0:00)
-//	 * @param Cod_n Código del nivel resuelto
-//	 * @return True si se ha guardado con éxito, Falso en caso contrario
-//	 */
-//	public static boolean guardarEjercicio(int Cod_u, int tiempo, int Cod_n){
-//		return false;
-//	}
-	
 		/**
 		 * Introduce a un usuario en una posición del ranking dependiendo de cómo de bien ha resuelto el ejercicio
 		 * @param tiempo El parámtero sobre el que se evalua el ejercicio
@@ -248,14 +241,13 @@ public class AccesosBD implements Serializable{
 		}
 	
 	/**
-	 * Devuelve un ArrayList con los nombres de los niveles que haya en el paquete dado en los parámteros y con la información referente al usuario de cada uno
-	 * @param paquete Nombre del paquete
-	 * @param Cod_u Código del usuario que desdea ver los niveles disponibles
-	 * @return ArrayList<String> con los nombres de los niveles, en los nombres estará el numero del nivel + el nombre
+	 * Devuelve un ArrayList con los nombres de los niveles que haya en la BD
+	 * @return ArrayList<String> con los nombres de los niveles
 	 */
-	public static ArrayList<String> mostrarNiveles(String paquete, int Cod_u){
-		viewTableContent("TABLASBD");
-		ArrayList<String> a = new ArrayList<>();
+	public static ArrayList<String> mostrarNiveles(){
+		abrirConex();
+		ArrayList<String> a = viewTableContent("NIVELES");
+		cerrarConex();
 		return a;
 	}
 	
@@ -316,7 +308,7 @@ public class AccesosBD implements Serializable{
 		    			}
 		    		}
 		    		else if(s.equals("DEL")){
-		    			final String sent = "DELETE FROM TABLASBD WHERE NOM_TABLA='L';";
+		    			final String sent = "UPDATE CLASES SET NOM_CLASE = 'PERSONAJE' WHERE COD_CLASE = 'N2C6';";
 		    			try {
 		    				statement.executeUpdate(sent);
 		    				System.out.println("Data deleted");
@@ -409,6 +401,7 @@ public class AccesosBD implements Serializable{
 	 */
 	public static void main(String args[]){
 		abrirConex();
+//		ObjetoNivel on = crearNivel("N2", "EJ_WALLS");
 		generateTables();
 		cerrarConex();
 	}
