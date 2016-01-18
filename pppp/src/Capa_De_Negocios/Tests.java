@@ -11,14 +11,14 @@ import Ej_Walls.Ej_Walls;
 
 public class Tests {
 	
-    public static void principal(String cod_nivel) {
+    public static boolean principal(String cod_nivel) {
     	switch(cod_nivel){
     	case("N1"):
     		//Ejercicio deslizar
         	try {
     			if(ejercicioDeslizar()){
-    				//ejercicio superado 
-    				
+    				//ejercicio superado
+    				return true;
     			}
     		} catch (IOException e) {
     			e.printStackTrace();
@@ -29,7 +29,7 @@ public class Tests {
         	try {
     			if(ejercicioWalls()){
     				//ejercicio superado 
-    				
+    				return true;
     			}
     		} catch (IOException e) {
     			e.printStackTrace();
@@ -40,7 +40,7 @@ public class Tests {
         	try {
     			if(ejercicioEnemigos()){
     				//ejercicio superado 
-    				
+    				return true;
     			}
     		} catch (IOException e) {
     			e.printStackTrace();
@@ -49,6 +49,9 @@ public class Tests {
     	}
     	//guardar en la BD que el usuario en cuestion a superado el nivel
 		//mostrar al usuairo que ha superado el ejercicio
+    	return false;
+    	//Si devuelve true:
+//    	AccesosBD.resueltos(cod_nivel, cod_jug);
     }
 	
 

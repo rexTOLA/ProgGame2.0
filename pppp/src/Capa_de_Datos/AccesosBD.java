@@ -240,16 +240,11 @@ public class AccesosBD implements Serializable{
 //			return clase;
 //		}
 	
-		/**
-		 * Introduce a un usuario en una posición del ranking dependiendo de cómo de bien ha resuelto el ejercicio
-		 * @param tiempo El parámtero sobre el que se evalua el ejercicio
-		 * @param Cod_n Nivel resuelto
-		 * @param Cod_u Usuairo que lo ha resuelto
-		 * @return True si se ha podidio guardar, False en caso contrario
-		 */
-		private static boolean ranking(int tiempo, int Cod_n, int Cod_u){
-			return false;
-		}
+	
+	public static boolean resueltos(String Cod_nivel, String Cod_jug){
+		insertRowInto("'" + Cod_nivel + "', '" + Cod_jug + "'", "RESUELTOS");
+		return true;
+	}
 	
 	/**
 	 * Devuelve un ArrayList con los nombres de los niveles que haya en la BD
@@ -411,9 +406,10 @@ public class AccesosBD implements Serializable{
 	 * @param args
 	 */
 	public static void main(String args[]){
-//		abrirConex();
-//		generateTables();
-//		cerrarConex();
-		ObjetoNivel on = getNivel("Ej_Walls");
+		abrirConex();
+//		resueltos("N1", "COD_AINHOA");
+		generateTables();
+		cerrarConex();
+//		ObjetoNivel on = getNivel("Ej_Walls");
 	}
 }
