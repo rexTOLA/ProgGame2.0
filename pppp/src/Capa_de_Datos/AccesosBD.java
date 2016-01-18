@@ -101,8 +101,9 @@ public class AccesosBD implements Serializable{
 	 * @param nom_nivel
 	 * @return
 	 */
-	public static ObjetoNivel getNivel(String nom_nivel){
+	public static ObjetoNivel getNivel(String nombre){
 		abrirConex();
+		String nom_nivel = nombre.toUpperCase();
 		String cod_nivel = traductorNivel(nom_nivel);
 		ObjetoNivel oNivel = crearNivel(cod_nivel, nom_nivel);
 		cerrarConex();
