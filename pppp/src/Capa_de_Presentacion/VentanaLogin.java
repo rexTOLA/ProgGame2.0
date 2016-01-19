@@ -23,9 +23,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.logging.Logger;
+
 
 
 public class VentanaLogin extends JFrame {
@@ -35,7 +33,7 @@ public class VentanaLogin extends JFrame {
 	private JPasswordField passwordField;
 	public String username;
 	public String contraseña;
-	public String cod_u;
+	public static String cod_u;
 
 	/**
 	 * Launch the application.
@@ -62,29 +60,6 @@ public class VentanaLogin extends JFrame {
 
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getContraseña() {
-		return contraseña;
-	}
-
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}
-
-	public String getCod_u() {
-		return cod_u;
-	}
-
-	public void setCod_u(String cod_u) {
-		this.cod_u = cod_u;
-	}
 
 	/**
 	 * Create the frame.

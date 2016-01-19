@@ -193,7 +193,7 @@ public class AccesosBD implements Serializable{
 			}
 			nom_nivel = estandarizar(nom_nivel);
 			nom_clase = estandarizar(nom_clase);
-			String ruta = "src/" + nom_nivel + "/" + nom_clase;
+			String ruta = "src/" + nom_nivel + "/" + nom_clase + ".java";
 			ObjetoClase oClase = new ObjetoClase(cod_clase, nom_clase, alterable, cod_nivel, ruta);
 			return oClase;
 		}
@@ -389,7 +389,6 @@ public class AccesosBD implements Serializable{
 					try{
 						while(true){
 							String a = resultado.getString(i);
-							a = estandarizar(a);
 							content.add(a);
 							i++;
 						}
