@@ -134,18 +134,18 @@ public class VentanaJuego extends JFrame {
 				//				} catch (Exception e2) {
 				//					// TODO: handle exception
 				//				}
-				ClassLoader classLoader = VentanaJuego.class.getClassLoader();
-				try {
-					Class aClass = classLoader.loadClass("/Ej_Deslizar/Hielo2.java");
-					
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				}
+//				ClassLoader classLoader = VentanaJuego.class.getClassLoader();
+//				try {
+//					Class aClass = classLoader.loadClass("/Ej_Deslizar/Hielo2.java");
+//					
+//				} catch (ClassNotFoundException e1) {
+//					e1.printStackTrace();
+//				}
 
-
-				hiloJueg = new Thread( new hiloJuego());
-				hiloJueg.start();
-
+				
+					hiloJueg = new Thread( new hiloJuego());
+					hiloJueg.start();
+				
 
 			}
 
@@ -218,14 +218,17 @@ public class VentanaJuego extends JFrame {
 		if(AccesosBD.mostrarNiveles().contains(nom_nivel)){
 			tabbedPane.remove(0);
 			switch (nom_nivel) {
-			case "EJ_DESLIZAR":{VentanaJuego.printEnunciado("Mueve al personaje(0) para llegar a la salida(*).\n Para moverte usa wasd. Y cuidado con el hielo,\n ¡resvala!\n");
+			case "EJ_DESLIZAR":{VentanaJuego.printEnunciado("Mueve al personaje(0) para llegar a la salida(*).\n Para moverte usa wasd. Y cuidado con el hielo,\n ¡resvala!\n"
+					+ "La clase que puedes modificar es Hielo2");
 			}
-			break;
+				break;
 			case "EJ_ENEMIGO":{
 				VentanaJuego.printEnunciado("Mueve al personaje(p) para llegar a la salida($).\n Para moverte usa wasd.\n Atento a los agujeros, no vaya a ser que te caigas.\n"
-						+ " Y cuidado con los enemigos, si te ven, ¡te dispararán!\n");
+						+ " Y cuidado con los enemigos, si te ven, ¡te dispararán!\nLa clase que puedes modificar es Tablero");
+				break;
 			}case "EJ_WALLS":{
-				VentanaJuego.printEnunciado("Mueve al personaje(8) para llegar a la salida(O).\n Para moverte usa wasd, si puedes...\n");
+				VentanaJuego.printEnunciado("Mueve al personaje(8) para llegar a la salida(O).\n Para moverte usa wasd, si puedes...\nLa clase que puedes modificar es Mover");
+				break;
 			}
 
 			default:
