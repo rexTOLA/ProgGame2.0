@@ -134,13 +134,13 @@ public class VentanaJuego extends JFrame {
 				//				} catch (Exception e2) {
 				//					// TODO: handle exception
 				//				}
-//				ClassLoader classLoader = Hielo2.class.getClassLoader();
-//				try {
-//					Class aClass = classLoader.loadClass("/Ej_Deslizar/Hielo2.java");
-//					System.out.println("aClass.getName() = " + aClass.getName());
-//				} catch (ClassNotFoundException e1) {
-//					e1.printStackTrace();
-//				}
+				ClassLoader classLoader = VentanaJuego.class.getClassLoader();
+				try {
+					Class aClass = classLoader.loadClass("/Ej_Deslizar/Hielo2.java");
+					
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
 
 
 				hiloJueg = new Thread( new hiloJuego());

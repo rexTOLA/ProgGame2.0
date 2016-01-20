@@ -5,6 +5,5 @@
 	<classpathentry kind="lib" path="jl1.0.1.jar"/>
 	<classpathentry kind="lib" path="nimrodlf.jar"/>
 	<classpathentry kind="lib" path="sqlite-jdbc-3.8.11.2.jar"/>
-	<classpathentry kind="lib" path="jreloader-0.4.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
