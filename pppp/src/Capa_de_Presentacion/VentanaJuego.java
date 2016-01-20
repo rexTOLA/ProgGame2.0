@@ -32,7 +32,7 @@ import Capa_De_Negocios.ObjetoClase;
 import Capa_De_Negocios.ObjetoNivel;
 import Capa_De_Negocios.Tests;
 import Capa_de_Datos.AccesosBD;
-
+import Ej_Deslizar.Hielo2;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -70,6 +70,7 @@ public class VentanaJuego extends JFrame {
 	protected static ObjetoClase obEditable;
 	protected static String ruta;
 	protected static ArrayList<String> pestañas=new ArrayList<>();
+	protected static Thread hiloJueg;
 
 
 
@@ -118,16 +119,36 @@ public class VentanaJuego extends JFrame {
 		JButton btnCheck = new JButton("PLAY");
 		btnCheck.addActionListener(new ActionListener(){
 
+
 			public void actionPerformed(ActionEvent e) {
 				try {
 					escribeFichero();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				Thread hiloJuego = new Thread( new hiloJuego());
-				hiloJuego.start();
+
+				//				try {
+				//					if(hiloJueg.isAlive()){
+				//					
+				//					}
+				//				} catch (Exception e2) {
+				//					// TODO: handle exception
+				//				}
+//				ClassLoader classLoader = Hielo2.class.getClassLoader();
+//				try {
+//					Class aClass = classLoader.loadClass("/Ej_Deslizar/Hielo2.java");
+//					System.out.println("aClass.getName() = " + aClass.getName());
+//				} catch (ClassNotFoundException e1) {
+//					e1.printStackTrace();
+//				}
+
+
+				hiloJueg = new Thread( new hiloJuego());
+				hiloJueg.start();
+
 
 			}
+
 		});
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -222,7 +243,7 @@ public class VentanaJuego extends JFrame {
 				}
 
 			}			
-			
+
 			tree = new JTree(root);
 			tree.setShowsRootHandles(true);
 			tree.setRootVisible(true);
@@ -241,6 +262,8 @@ public class VentanaJuego extends JFrame {
 						}
 					}
 
+					textArea=new JTextArea();
+					scrollPane=new JScrollPane(textArea);
 
 
 					if(obEditable.name.equals(s)){
@@ -257,8 +280,7 @@ public class VentanaJuego extends JFrame {
 						e1.printStackTrace();
 					}
 
-					textArea=new JTextArea();
-					scrollPane=new JScrollPane(textArea);
+
 
 					int j=0;
 					for (int i = 0; i < pestañas.size(); i++) {
@@ -361,7 +383,7 @@ public class VentanaJuego extends JFrame {
 					e2.printStackTrace();
 				}
 			}
-		}editable=false;
+		}
 	}
 
 
