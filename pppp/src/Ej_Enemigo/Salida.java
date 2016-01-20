@@ -6,7 +6,7 @@ public class Salida extends Tile implements Printeable{
 	private Coordenada coord;
 	
 	public Salida() {
-		super('$');
+		super('*');
 		coord = new Coordenada(7, 3);
 	}
 
