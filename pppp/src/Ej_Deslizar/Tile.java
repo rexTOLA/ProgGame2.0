@@ -1,3 +1,4 @@
+//No Editable
 package Ej_Deslizar;
 
 public abstract class Tile extends ObjetoJuego{

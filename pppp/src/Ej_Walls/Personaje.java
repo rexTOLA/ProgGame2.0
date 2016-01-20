@@ -1,4 +1,7 @@
+//No Editable
 package Ej_Walls;
+
+import Capa_de_Presentacion.VentanaJuego;
 
 public class Personaje extends ObjetoJuego{
 	 
@@ -24,14 +27,14 @@ public class Personaje extends ObjetoJuego{
 				cord = new Coordenada(x, y);
 			}
 			else if (tablero[y][x].go() == Tile.STOP){
-				System.out.println("No puedes ir en esa dirección");
+				VentanaJuego.println("No puedes ir en esa dirección");
 			}
 			else if(tablero[y][x].go() == Tile.WIN){
 				return true;
 			}
 		}
 		else{
-			System.out.println("Las coordendadas de destino no son válidas");
+			VentanaJuego.println("Las coordendadas de destino no son válidas");
 		}
 		return false;
 	}

@@ -64,11 +64,13 @@ public class VentanaJuego extends JFrame {
 	protected JScrollPane spSalida = new JScrollPane(taSalida);
 
 	protected static DefaultMutableTreeNode selectedNode;
-	protected static String nom_nivel;
+	public static String nom_nivel;
 	protected static JTabbedPane tabbedPane;
 	protected static boolean editable=false;
 	protected static ObjetoClase obEditable;
 	protected static String ruta;
+	protected static ArrayList<String> pestañas=new ArrayList<>();
+
 
 
 	/**
@@ -118,17 +120,12 @@ public class VentanaJuego extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				try {
-
 					escribeFichero();
 				} catch (IOException e1) {
-
 					e1.printStackTrace();
 				}
-				ObjetoNivel nivel=AccesosBD.getNivel(nom_nivel);
-
-				if(Tests.principal(nivel.code)==true){
-					AccesosBD.resueltos(nivel.code, VentanaLogin.cod_u);
-				}
+				Thread hiloJuego = new Thread( new hiloJuego());
+				hiloJuego.start();
 
 			}
 		});
@@ -166,10 +163,6 @@ public class VentanaJuego extends JFrame {
 						.addGap(8))
 				);
 
-
-
-
-
 		tabbedPane = new JTabbedPane();
 		tabbedPane.add("ProgGaming", jLabelImagen);
 		taEnunciado.setEditable(false);
@@ -198,20 +191,20 @@ public class VentanaJuego extends JFrame {
 	}
 
 	public static void crearTree(String nom_nivel){
-		tabbedPane.remove(0);
+
 		nom_nivel=nom_nivel.toUpperCase();
 
 		if(AccesosBD.mostrarNiveles().contains(nom_nivel)){
-
+			tabbedPane.remove(0);
 			switch (nom_nivel) {
-			case "EJ_DESLIZAR":{VentanaJuego.printEnunciado("Mueve al personaje para llegar a la salida.\n Para moverte usa wasd. Y cuidado con el hielo,\n ¡resvala!\n");
+			case "EJ_DESLIZAR":{VentanaJuego.printEnunciado("Mueve al personaje(0) para llegar a la salida(*).\n Para moverte usa wasd. Y cuidado con el hielo,\n ¡resvala!\n");
 			}
 			break;
 			case "EJ_ENEMIGO":{
-				VentanaJuego.printEnunciado("Mueve al personaje para llegar a la salida.\n Para moverte usa wasd.\n Atento a los agujeros, no vaya a ser que te caigas.\n"
+				VentanaJuego.printEnunciado("Mueve al personaje(p) para llegar a la salida($).\n Para moverte usa wasd.\n Atento a los agujeros, no vaya a ser que te caigas.\n"
 						+ " Y cuidado con los enemigos, si te ven, ¡te dispararán!\n");
 			}case "EJ_WALLS":{
-				VentanaJuego.printEnunciado("Mueve al personaje para llegar a la salida.\n Para moverte usa wasd, si puedes...\n");
+				VentanaJuego.printEnunciado("Mueve al personaje(8) para llegar a la salida(O).\n Para moverte usa wasd, si puedes...\n");
 			}
 
 			default:
@@ -226,15 +219,13 @@ public class VentanaJuego extends JFrame {
 				root.add(new DefaultMutableTreeNode(ob.name));
 				if(ob.alter){
 					obEditable=ob;
-
 				}
 
-			}
-
+			}			
+			
 			tree = new JTree(root);
 			tree.setShowsRootHandles(true);
 			tree.setRootVisible(true);
-
 
 			tree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
 				@Override
@@ -250,8 +241,7 @@ public class VentanaJuego extends JFrame {
 						}
 					}
 
-					textArea=new JTextArea();
-					scrollPane=new JScrollPane(textArea);
+
 
 					if(obEditable.name.equals(s)){
 						textArea.setEditable(obEditable.alter);
@@ -267,8 +257,21 @@ public class VentanaJuego extends JFrame {
 						e1.printStackTrace();
 					}
 
-					textArea.setText(algo);
-					tabbedPane.addTab(s,null,scrollPane,null);
+					textArea=new JTextArea();
+					scrollPane=new JScrollPane(textArea);
+
+					int j=0;
+					for (int i = 0; i < pestañas.size(); i++) {
+						if(pestañas.contains(s)){
+							j=i;
+						}
+					}
+					if(!pestañas.contains(s)){
+						pestañas.add(s);
+						textArea.setText(algo);
+						tabbedPane.addTab(s,null,scrollPane,null);
+					}
+
 
 				}
 			});
@@ -294,6 +297,13 @@ public class VentanaJuego extends JFrame {
 	public static void println( String s ) {
 		if (miVentana == null) init();
 		miVentana.taSalida.append( s + "\n" );
+	}
+	/** Escribe en la ventana de la consola una línea
+	 * @param s	String a visualizar en la ventana
+	 */
+	public static void print( String s ) {
+		if (miVentana == null) init();
+		miVentana.taSalida.append( s+"" );
 	}
 	/** Escribe en la ventana del enunciado una línea
 	 * @param s	String a visualizar en la ventana
@@ -402,5 +412,16 @@ class MiHilo implements Runnable {
 	public void run() {
 
 		VentanaJuego.consola();
+	}
+}
+
+class hiloJuego implements Runnable{
+	public void run(){
+
+		ObjetoNivel nivel=AccesosBD.getNivel(VentanaJuego.nom_nivel);
+
+		if(Tests.principal(nivel.code)==true){
+			AccesosBD.resueltos(nivel.code, VentanaLogin.cod_u);
+		}
 	}
 }

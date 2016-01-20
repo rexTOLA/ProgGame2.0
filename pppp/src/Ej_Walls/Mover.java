@@ -1,5 +1,7 @@
-
+//Editable
 package Ej_Walls;
+
+import Capa_de_Presentacion.VentanaJuego;
 
 public class Mover {
 
@@ -18,7 +20,7 @@ public class Mover {
 			cord.x = cord.x + 2; 
 			break;
 		default:
-			System.out.println("Movimiento no válido");
+			VentanaJuego.println("Movimiento no válido");
 		}
 		return true;
 	}

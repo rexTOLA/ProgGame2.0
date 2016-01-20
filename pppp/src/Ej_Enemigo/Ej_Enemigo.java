@@ -1,4 +1,7 @@
+//No Editable
 package Ej_Enemigo;
+
+import Capa_de_Presentacion.VentanaJuego;
 
 public class Ej_Enemigo {
 
@@ -88,7 +91,7 @@ public class Ej_Enemigo {
 			cord.x++;
 			break;
 		default:
-			System.out.println("Movimiento no válido");
+			VentanaJuego.println("Movimiento no válido");
 			return false;
 		}
 		return true;

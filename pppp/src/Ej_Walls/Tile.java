@@ -1,3 +1,4 @@
+//No Editable
 package Ej_Walls;
 
 public class Tile extends ObjetoJuego{

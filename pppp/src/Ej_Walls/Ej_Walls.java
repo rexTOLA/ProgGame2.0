@@ -1,4 +1,7 @@
+//No Editable
 package Ej_Walls;
+
+import Capa_de_Presentacion.VentanaJuego;
 
 public class Ej_Walls {
 	
@@ -23,13 +26,13 @@ public class Ej_Walls {
 			for(int i = 0; i<7; i++){
 				for(int j = 0; j<9; j++){
 					if (i == p.getY() && j == p.getX()){
-						System.out.print(p);
+						VentanaJuego.print(p.toString());
 					}
 					else{
-						System.out.print(tablero[i][j]);
+						VentanaJuego.print(tablero[i][j].toString());
 					}
 				}
-				System.out.println();
+				VentanaJuego.println("");
 			}
 		}
 	

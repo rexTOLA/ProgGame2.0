@@ -1,4 +1,7 @@
+//No Editable
 package Ej_Deslizar;
+
+import Capa_de_Presentacion.VentanaJuego;
 
 public class Ej_Deslizar {
 	 
@@ -27,13 +30,13 @@ public class Ej_Deslizar {
 		for(int i = 0; i<10; i++){
 			for(int j = 0; j<10; j++){
 				if (i == p.actualY && j == p.actualX){
-					System.out.print(p);
+					VentanaJuego.print(p.toString());
 				}
 				else{
-					System.out.print(tablero[i][j]);
+					VentanaJuego.print(tablero[i][j].toString());
 				}
 			}
-			System.out.println();
+			VentanaJuego.println("");
 		}
 	}
 	public boolean move(String movement){
@@ -51,7 +54,7 @@ public class Ej_Deslizar {
 			p.moveRight();
 			break;
 		default:
-			System.out.println("Invalid movement character, try again");
+			VentanaJuego.println("Invalid movement character, try again");
 			return false;
 		}
 		int x = p.actualX;
@@ -72,7 +75,7 @@ public class Ej_Deslizar {
 			return true;
 		}
 		else{
-			System.out.println("An unkonwn error has occurred. Try to move again.");
+			VentanaJuego.println("An unkonwn error has occurred. Try to move again.");
 			return false;
 		}
 	}

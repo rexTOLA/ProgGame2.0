@@ -61,13 +61,13 @@ public class Tests {
 	 * @throws IOException
 	 */
     public static boolean ejercicioDeslizar() throws IOException{
-    	VentanaJuego.printEnunciado("Mueve al personaje(0) para llegar a la salida(*).\n Para moverte usa wasd. Y cuidado con el hielo,\n ¡resvala!\n");
+    	
     	Ej_Deslizar ed = new Ej_Deslizar();
     	String s;
     	do{
     		ed.printTablero();
-    		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    		s = br.readLine();
+    		s=VentanaJuego.readLine();
+    		
     	}
 		while(!ed.move(s));	
     	
@@ -76,7 +76,7 @@ public class Tests {
     }
     
     public static boolean ejercicioWalls() throws IOException{
-    	VentanaJuego.printEnunciado("Mueve al personaje(8) para llegar a la salida(O).\n Para moverte usa wasd, si puedes...\n");
+    	
     	Ej_Walls ew = new Ej_Walls();
     	String s;
     	do{
@@ -90,8 +90,7 @@ public class Tests {
     }
     
     public static boolean ejercicioEnemigos() throws IOException{
-    	VentanaJuego.printEnunciado("Mueve al personaje(p) para llegar a la salida($).\n Para moverte usa wasd.\n Atento a los agujeros, no vaya a ser que te caigas.\n"
-				+ " Y cuidado con los enemigos, si te ven, ¡te dispararán!\n");
+    	
     	Ej_Enemigo en = new Ej_Enemigo();
     	String s;
     	int fin = 0;

@@ -1,4 +1,7 @@
+//Editable
 package Ej_Enemigo;
+
+import Capa_de_Presentacion.VentanaJuego;
 
 public class Tablero {
 	
@@ -27,13 +30,13 @@ public class Tablero {
 			for(int j = 0; j<9; j++){
 				Printeable print = ej.checkPrinteable(i, j);
 				if (print!=null){
-					System.out.print(print);
+					VentanaJuego.print(print.toString());
 				}
 				else{
-					System.out.print(tab[i][j]);
+					VentanaJuego.print(tab[i][j].toString());
 				}
 			}
-			System.out.println();
+			VentanaJuego.println("");
 		}
 	}
 }

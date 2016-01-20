@@ -1,3 +1,4 @@
+//No Editable
 package Ej_Enemigo;
 
 public class Coordenada {

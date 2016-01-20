@@ -1,4 +1,7 @@
+//No Editable
 package Ej_Enemigo;
+
+import Capa_de_Presentacion.VentanaJuego;
 
 public class Personaje extends ObjetoJuego implements Printeable{
 	 
@@ -30,7 +33,7 @@ public class Personaje extends ObjetoJuego implements Printeable{
 			return tablero[y][x].go();
 		}
 		else{
-			System.out.println("Las coordendadas de destino no son válidas");
+			VentanaJuego.println("Las coordendadas de destino no son válidas");
 			return -1;
 		}
 	}
