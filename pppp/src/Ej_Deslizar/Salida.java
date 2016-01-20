@@ -4,7 +4,7 @@ package Ej_Deslizar;
 public class Salida extends Tile{
 
 	public Salida() {
-		super('*');
+		super('S');
 	}
 
 	@Override

@@ -6,21 +6,23 @@ import Capa_de_Presentacion.VentanaJuego;
 public class Tablero {
 	
 	Tile h;
+	Tile hv;
 	Tile f;
 	Tile tab[][];
 	
 	public Tablero(){
-		h = new Hole ('O');
+		h = new Hole ('-');
+		hv = new Hole ('|');
 		f = new Tile(' ');
 		
 		Tile tabl[][] = {{h, h, h, h, h, h, h, h, h},
-						{h, f, f, f, f, f, f, f, h}, //1
-						{h, f, f, f, f, f, f, f, h}, //2
-						{h, f, f, f, f, f, f, f, h}, //3
-						{h, f, f, f, f, f, f, f, h}, //4
-						{h, f, f, f, f, f, f, f, h}, //5
-						{h, f, f, f, f, f, f, f, h}, //6
-						{h, f, f, f, f, f, f, f, h}, //7
+						{hv, f, f, f, f, f, f, f, hv}, //1
+						{hv, f, f, f, f, f, f, f, hv}, //2
+						{hv, f, f, f, f, f, f, f, hv}, //3
+						{hv, f, f, f, f, f, f, f, hv}, //4
+						{hv, f, f, f, f, f, f, f, hv}, //5
+						{hv, f, f, f, f, f, f, f, hv}, //6
+						{hv, f, f, f, f, f, f, f, hv}, //7
 						{h, h, h, h, h, h, h, h, h}};
 		tab = tabl;
 	}

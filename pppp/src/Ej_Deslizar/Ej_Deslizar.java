@@ -5,7 +5,7 @@ import Capa_de_Presentacion.VentanaJuego;
 
 public class Ej_Deslizar {
 	 
-	Tile ph = new Pared ('-');
+	Tile ph = new Pared ('M');
 	Tile pv = new Pared ('|');
 	Tile pe = new Pared (' ');
 	Tile h = new Hielo();
